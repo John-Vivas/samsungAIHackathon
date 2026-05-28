@@ -1,0 +1,6 @@
+# Dependencias instaladas fuera del proyecto real
+node_modules/
+
+# Archivos de npm del proyecto raíz que no deben versionarse
+package.json
+package-lock.json
