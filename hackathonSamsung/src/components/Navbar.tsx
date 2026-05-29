@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Productos', path: '/productos', icon: 'shopping_bag' },
   { label: 'Insights', path: '/insights', icon: 'insights' },
   { label: 'Panel', path: '/panel', icon: 'dashboard' },
+  { label: 'Equipo', path: '/about', icon: 'group' },
 ];
 
 const Navbar = () => {
