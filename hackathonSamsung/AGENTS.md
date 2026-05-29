@@ -1,5 +1,5 @@
 AGENTS.md - Architecture & Context (Samsung AI Analytics Hub)
-This file serves as persistent memory and context for any AI agent, LLM assistant, or developer working on the Samsung AI Analytics Hub hackathon project. It outlines the frontend architecture, data flow, features, and AI integration guidelines to ensure rapid development and code consistency.
+This file serves as persistent memory and context for any AI agent, LLM assistant, or developer working on the hackathonsamsung project. It outlines the frontend architecture, data flow, features, and AI integration guidelines to ensure rapid development and code consistency.
 
 1. Project Overview
 The Samsung AI Analytics Hub is an intelligent dashboard application designed for a hackathon. It processes data regarding Samsung product sales, customer behavior, and inventory levels, using AI agents to provide deep insights, predictive analytics, and conversational data exploration.
@@ -19,7 +19,7 @@ State & Data Fetching: React Query (@tanstack/react-query) for caching mock/real
 
 Data Visualization: Recharts or Chart.js (optimized for real-time lookups and interactive filtering).
 
-Styling: Tailwind CSS + Radix UI primitives + shadcn/ui components.
+Styling: CSS + Radix UI primitives + shadcn/ui components.
 
 AI / LLM Integration: Vercel AI SDK or direct streaming integration with an LLM API (e.g., OpenAI/Anthropic/Gemini) to act as the resident data analyst agent.
 

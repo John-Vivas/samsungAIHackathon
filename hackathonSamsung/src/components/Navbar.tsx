@@ -1,49 +1,74 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import '../pages/Home.css'; // Import page styles containing navigation classes
 
 const navItems = [
-  { label: 'Inicio', path: '/home' },
-  { label: 'Productos', path: '/productos' },
-  { label: 'Insights', path: '/insights' },
-  { label: 'Panel', path: '/panel' },
+  { label: 'Inicio', path: '/home', icon: 'home' },
+  { label: 'Productos', path: '/productos', icon: 'shopping_bag' },
+  { label: 'Insights', path: '/insights', icon: 'insights' },
+  { label: 'Panel', path: '/panel', icon: 'dashboard' },
 ];
 
 const Navbar = () => {
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav style={{
-      background: '#181c23',
-      padding: '0.5rem 2rem',
-      display: 'flex',
-      alignItems: 'center',
-      borderBottom: '1px solid #23272f',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000,
-    }}>
-      <span style={{ fontWeight: 700, fontSize: 18, color: '#fff', marginRight: 32 }}>
-        <span role="img" aria-label="logo">🏠</span> Samsung Smart Commerce AI
-      </span>
-      <div style={{ display: 'flex', gap: 24 }}>
-        {navItems.map(item => (
+    <>
+      {/* TopAppBar */}
+      <header className={scrolled ? 'scrolled' : ''}>
+        <div className="header-container">
+          <div className="logo-section">
+            <span className="material-symbols-outlined logo-icon">smart_toy</span>
+            <h1>Samsung Smart Commerce AI</h1>
+          </div>
+          <nav>
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={location.pathname === item.path ? 'active' : ''}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <button className="strategy-btn">
+            <span className="material-symbols-outlined text-sm">bolt</span>
+            Modo Estrategia IA
+          </button>
+          <button className="mobile-menu">
+            <span className="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </header>
+
+      {/* BottomNavBar (Mobile Only) */}
+      <nav className="bottom-nav">
+        {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            style={{
-              color: location.pathname === item.path ? '#4ea8ff' : '#fff',
-              textDecoration: 'none',
-              fontWeight: 500,
-              fontSize: 16,
-              padding: '6px 12px',
-              borderRadius: 6,
-              background: location.pathname === item.path ? '#23272f' : 'transparent',
-              transition: 'background 0.2s',
-            }}
+            className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
           >
-            {item.label}
+            <span className="material-symbols-outlined">{item.icon}</span>
+            <span className="nav-label">{item.label}</span>
           </Link>
         ))}
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 
