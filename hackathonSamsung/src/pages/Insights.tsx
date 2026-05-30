@@ -147,7 +147,7 @@ const Insights = () => {
         },
         tooltip: {
           callbacks: {
-            label: (context: any) => `${context.dataset.label}: $${context.parsed.y.toLocaleString('es-CO')}`
+            label: (context: any) => `${context.dataset.label}: ${context.parsed.y.toLocaleString('es-CO')}`
           }
         },
         title: {
@@ -353,7 +353,7 @@ const Insights = () => {
                   className={`card-sales-bar ${activeClienteIndex === index ? 'active' : ''}`}
                   style={{ height: cliente.height }}
                   onClick={() => setActiveClienteIndex(index)}
-                  title={`${cliente.Channel}: $${cliente.Ventas_Total.toLocaleString('es-CO')}`}
+                  title={`${cliente.Channel}: ${cliente.Ventas_Total.toLocaleString('es-CO')}`}
                 ></div>
               ))}
             </div>
@@ -363,8 +363,8 @@ const Insights = () => {
                 <span className="value">{topClientes[activeClienteIndex].Channel}</span>
               </div>
               <div>
-                <span className="title">Ventas</span>
-                <span className="value">${topClientes[activeClienteIndex].Ventas_Total.toLocaleString('es-CO')}</span>
+                <span className="title">Ventas Totales</span>
+                <span className="value">{topClientes[activeClienteIndex].Ventas_Total.toLocaleString('es-CO')}</span>
               </div>
             </div>
             <p className="card-sales-desc">Seleccione una barra para ver el cliente con mayor venta en este top 10.</p>
@@ -393,8 +393,8 @@ const Insights = () => {
                 <span className="value">{topProductos[activeProductoIndex].Producto}</span>
               </div>
               <div>
-                <span className="title">Ventas</span>
-                <span className="value">${topProductos[activeProductoIndex].Ventas_Total.toLocaleString('es-CO')}</span>
+                <span className="title">Ventas Totales</span>
+                <span className="value">{topProductos[activeProductoIndex].Ventas_Total.toLocaleString('es-CO')}</span>
               </div>
             </div>
             <p className="card-sales-desc">Seleccione una barra para ver el producto con mayor venta en este top 10.</p>
@@ -416,7 +416,7 @@ const Insights = () => {
               </div>
               <div>
                 <span className="title">Ventas Totales</span>
-                <span className="value">${bestYear.Ventas_Total.toLocaleString('es-CO')}</span>
+                <span className="value">{bestYear.Ventas_Total.toLocaleString('es-CO')}</span>
               </div>
               <div>
                 <span className="title">Promedio Semanal</span>
@@ -502,11 +502,11 @@ const Insights = () => {
               </div>
               <div>
                 <span className="title">Total</span>
-                <span className="value">${trendTotal.toLocaleString('es-CO')}</span>
+                <span className="value">{trendTotal.toLocaleString('es-CO')}</span>
               </div>
               <div>
                 <span className="title">Promedio</span>
-                <span className="value">${Math.round(trendAverage).toLocaleString('es-CO')}</span>
+                <span className="value">{Math.round(trendAverage).toLocaleString('es-CO')}%</span>
               </div>
             </div>
             <p className="card-sales-desc">Filtra por año para ver la evolución semanal de la métrica seleccionada.</p>
