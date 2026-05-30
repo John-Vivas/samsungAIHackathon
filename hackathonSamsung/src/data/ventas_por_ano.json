@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "2023",
+    "2024",
+    "2025"
+  ],
+  "values": [
+    3484194.0,
+    3442997.0,
+    1836814.0
+  ],
+  "data": [
+    {
+      "Año": "2023",
+      "Ventas_Total": 3484194.0,
+      "Promedio_Semanal": 5.451003154,
+      "Registros": 639184
+    },
+    {
+      "Año": "2024",
+      "Ventas_Total": 3442997.0,
+      "Promedio_Semanal": 6.5297318313,
+      "Registros": 527280
+    },
+    {
+      "Año": "2025",
+      "Ventas_Total": 1836814.0,
+      "Promedio_Semanal": 5.0025982373,
+      "Registros": 367172
+    }
+  ],
+  "generado_en": "2026-05-30T01:07:45.185760"
+}

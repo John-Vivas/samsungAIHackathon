@@ -1,0 +1,46 @@
+{
+  "top_clientes": [
+    {
+      "Channel": "CUSTOMER20",
+      "Ventas_Total": 1893136.0
+    },
+    {
+      "Channel": "CUSTOMER7",
+      "Ventas_Total": 1110240.0
+    },
+    {
+      "Channel": "CUSTOMER42",
+      "Ventas_Total": 874069.0
+    },
+    {
+      "Channel": "CUSTOMER24",
+      "Ventas_Total": 441652.0
+    },
+    {
+      "Channel": "CUSTOMER70",
+      "Ventas_Total": 392845.0
+    },
+    {
+      "Channel": "CUSTOMER27",
+      "Ventas_Total": 364407.0
+    },
+    {
+      "Channel": "CUSTOMER43",
+      "Ventas_Total": 277199.0
+    },
+    {
+      "Channel": "CUSTOMER69",
+      "Ventas_Total": 264447.0
+    },
+    {
+      "Channel": "CUSTOMER35",
+      "Ventas_Total": 258804.0
+    },
+    {
+      "Channel": "CUSTOMER73",
+      "Ventas_Total": 250817.0
+    }
+  ],
+  "total_registros": 98,
+  "generado_en": "2026-05-29T23:56:30.437474"
+}
