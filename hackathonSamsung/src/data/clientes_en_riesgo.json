@@ -1,0 +1,81 @@
+{
+  "_descripcion": "Lista completa de clientes ordenados por riesgo. Cada uno trae explicación en lenguaje claro y acción recomendada.",
+  "total": 66,
+  "clientes": [
+    {
+      "cliente": "CUSTOMER12",
+      "probabilidad": "97.0%",
+      "probabilidad_num": 0.97,
+      "nivel": "CRÍTICO - Riesgo alto sin diagnóstico claro",
+      "nivel_color": "#95a5a6",
+      "urgencia": "MONITOREAR",
+      "plazo": "-",
+      "valor_en_riesgo": "0 unidades",
+      "diagnostico": "Saludable",
+      "diagnostico_color": "#2ecc71",
+      "que_le_pasa": "Vende bien, tiene inventario y recibe producto normalmente.",
+      "que_hacer": "Mantener la relación comercial actual.",
+      "productos": "Ninguno"
+    },
+    {
+      "cliente": "CUSTOMER81",
+      "probabilidad": "95.0%",
+      "probabilidad_num": 0.95,
+      "nivel": "CRÍTICO - Riesgo alto sin diagnóstico claro",
+      "nivel_color": "#95a5a6",
+      "urgencia": "MONITOREAR",
+      "plazo": "-",
+      "valor_en_riesgo": "1 unidades",
+      "diagnostico": "Saludable",
+      "diagnostico_color": "#2ecc71",
+      "que_le_pasa": "Vende bien, tiene inventario y recibe producto normalmente.",
+      "que_hacer": "Mantener la relación comercial actual.",
+      "productos": "Ninguno"
+    },
+    {
+      "cliente": "CUSTOMER36",
+      "probabilidad": "95.0%",
+      "probabilidad_num": 0.95,
+      "nivel": "🟤 SIN SUMINISTRO - Revisar cadena de suministro",
+      "nivel_color": "#95a5a6",
+      "urgencia": "MONITOREAR",
+      "plazo": "-",
+      "valor_en_riesgo": "0 unidades",
+      "diagnostico": "No recibe producto",
+      "diagnostico_color": "#8e44ad",
+      "que_le_pasa": "El producto no está llegando desde el proveedor.",
+      "que_hacer": "Revisar cadena de suministro y confirmación de pedidos.",
+      "productos": "AV RECEIVER, RLF"
+    },
+    {
+      "cliente": "CUSTOMER70",
+      "probabilidad": "94.0%",
+      "probabilidad_num": 0.94,
+      "nivel": "CRÍTICO - Riesgo alto sin diagnóstico claro",
+      "nivel_color": "#95a5a6",
+      "urgencia": "MONITOREAR",
+      "plazo": "-",
+      "valor_en_riesgo": "11 unidades",
+      "diagnostico": "Saludable",
+      "diagnostico_color": "#2ecc71",
+      "que_le_pasa": "Vende bien, tiene inventario y recibe producto normalmente.",
+      "que_hacer": "Mantener la relación comercial actual.",
+      "productos": "Ninguno"
+    },
+    {
+      "cliente": "CUSTOMER50",
+      "probabilidad": "93.0%",
+      "probabilidad_num": 0.93,
+      "nivel": "🟤 SIN SUMINISTRO - Revisar cadena de suministro",
+      "nivel_color": "#95a5a6",
+      "urgencia": "MONITOREAR",
+      "plazo": "-",
+      "valor_en_riesgo": "2 unidades",
+      "diagnostico": "No recibe producto",
+      "diagnostico_color": "#8e44ad",
+      "que_le_pasa": "El producto no está llegando desde el proveedor.",
+      "que_hacer": "Revisar cadena de suministro y confirmación de pedidos.",
+      "productos": "MOBILE"
+    }
+  ]
+}

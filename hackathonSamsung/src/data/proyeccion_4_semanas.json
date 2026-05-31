@@ -1,0 +1,94 @@
+{
+  "_descripcion": "Proyección de ventas para los clientes más críticos en las próximas 4 semanas. Incluye semana estimada de churn.",
+  "titulo": "¿Cuándo se irán los clientes en riesgo?",
+  "subtitulo": "Proyección de ventas — próximas 4 semanas",
+  "semanas": [
+    "Semana 1",
+    "Semana 2",
+    "Semana 3",
+    "Semana 4"
+  ],
+  "clientes": [
+    {
+      "cliente": "CUSTOMER12",
+      "color": "#e74c3c",
+      "probabilidad": "97.2%",
+      "diagnostico": "Saludable",
+      "tendencia": "Estable",
+      "tendencia_color": "#f39c12",
+      "semana_churn": 1,
+      "alerta_churn": "Se estima que deja de comprar en la Semana 1",
+      "valores": {
+        "Semana_1": 0.0,
+        "Semana_2": 0.0,
+        "Semana_3": 0.0,
+        "Semana_4": 0.0
+      }
+    },
+    {
+      "cliente": "CUSTOMER81",
+      "color": "#3498db",
+      "probabilidad": "95.3%",
+      "diagnostico": "Saludable",
+      "tendencia": "Estable",
+      "tendencia_color": "#f39c12",
+      "semana_churn": 1,
+      "alerta_churn": "Se estima que deja de comprar en la Semana 1",
+      "valores": {
+        "Semana_1": 0.0,
+        "Semana_2": 0.0,
+        "Semana_3": 0.0,
+        "Semana_4": 0.0
+      }
+    },
+    {
+      "cliente": "CUSTOMER36",
+      "color": "#9b59b6",
+      "probabilidad": "95.1%",
+      "diagnostico": "No recibe producto",
+      "tendencia": "Bajando",
+      "tendencia_color": "#e74c3c",
+      "semana_churn": 3,
+      "alerta_churn": "Se estima que deja de comprar en la Semana 3",
+      "valores": {
+        "Semana_1": 0.0,
+        "Semana_2": 0.0,
+        "Semana_3": 0.0,
+        "Semana_4": 0.0
+      }
+    },
+    {
+      "cliente": "CUSTOMER70",
+      "color": "#f39c12",
+      "probabilidad": "94.3%",
+      "diagnostico": "Saludable",
+      "tendencia": "Estable",
+      "tendencia_color": "#f39c12",
+      "semana_churn": null,
+      "alerta_churn": "No se detecta caída total en 4 semanas",
+      "valores": {
+        "Semana_1": 1.0,
+        "Semana_2": 1.0,
+        "Semana_3": 1.0,
+        "Semana_4": 2.0
+      }
+    },
+    {
+      "cliente": "CUSTOMER50",
+      "color": "#1abc9c",
+      "probabilidad": "93.5%",
+      "diagnostico": "No recibe producto",
+      "tendencia": "Bajando",
+      "tendencia_color": "#e74c3c",
+      "semana_churn": null,
+      "alerta_churn": "No se detecta caída total en 4 semanas",
+      "valores": {
+        "Semana_1": 7.0,
+        "Semana_2": 7.0,
+        "Semana_3": 7.0,
+        "Semana_4": 6.0
+      }
+    }
+  ],
+  "alerta_general": "Atención: 3 cliente(s) podrían dejar de comprar desde la Semana 1. Actúa antes de que ocurra."
+}

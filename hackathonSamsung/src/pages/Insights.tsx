@@ -55,7 +55,7 @@ interface LowRotationItem {
 }
 
 const Insights = () => {
-  const [implemented, setImplemented] = useState<boolean>(false);
+  const [implemented, _] = useState<boolean>(false);
   const [activeClienteIndex, setActiveClienteIndex] = useState<number>(0);
   const [activeProductoIndex, setActiveProductoIndex] = useState<number>(0);
   const [selectedRotationIndex, setSelectedRotationIndex] = useState<number>(0);
@@ -134,7 +134,7 @@ const Insights = () => {
         y: {
           ticks: {
             color: '#c6c6c6',
-            callback: (value: number | string) => `$${Number(value).toLocaleString('es-CO')}`
+            callback: (value: number | string) => `${Number(value).toLocaleString('es-CO')}`
           },
           grid: {
             color: 'rgba(255, 255, 255, 0.08)'

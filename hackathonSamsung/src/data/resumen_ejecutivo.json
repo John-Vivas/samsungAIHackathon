@@ -1,0 +1,76 @@
+{
+  "_descripcion": "Resumen general del sistema de alertas. Úsalo para las tarjetas principales del dashboard.",
+  "titulo": "Sistema de Alertas de Clientes en Riesgo",
+  "subtitulo": "Samsung Electronics – Canal de Distribución",
+  "fecha": "31/05/2026 03:18",
+  "confiabilidad_modelo": {
+    "titulo": "¿Qué tan confiable es este sistema?",
+    "valor": "95.5%",
+    "estado": "Excelente",
+    "color": "#2ecc71",
+    "explicacion": "El modelo es muy confiable para tomar decisiones.",
+    "detalle": "De cada 100 clientes analizados, el sistema acierta en 95.5 casos.",
+    "auc": 0.993,
+    "auc_texto": "Capacidad del modelo para separar clientes sanos de clientes en fuga (1.0 = perfecto)"
+  },
+  "resumen_clientes": {
+    "titulo": "¿Cuántos clientes están en riesgo?",
+    "total_analizados": 66,
+    "tarjetas": [
+      {
+        "nivel": "CRÍTICO",
+        "color": "#e74c3c",
+        "icono": "🔴",
+        "clientes": 31,
+        "porcentaje": "47.0%",
+        "valor_riesgo": "120 unidades",
+        "que_significa": "Clientes que probablemente dejen de comprar en los próximos 30 días.",
+        "accion": "Contactar HOY — cada día sin acción aumenta el riesgo de pérdida."
+      },
+      {
+        "nivel": "MEDIO",
+        "color": "#f39c12",
+        "icono": "🟡",
+        "clientes": 6,
+        "porcentaje": "9.1%",
+        "valor_riesgo": "10 unidades",
+        "que_significa": "Clientes con señales de alerta que requieren seguimiento esta semana.",
+        "accion": "Monitorear y contactar en los próximos 7 días."
+      },
+      {
+        "nivel": "BAJO",
+        "color": "#2ecc71",
+        "icono": "🟢",
+        "clientes": 29,
+        "porcentaje": "43.9%",
+        "valor_riesgo": "162 unidades",
+        "que_significa": "Clientes estables. No requieren acción urgente.",
+        "accion": "Mantener relación comercial normal."
+      }
+    ]
+  },
+  "matriz_confusion": {
+    "titulo": "¿Cómo le fue al sistema en su última prueba?",
+    "explicacion": "Esto mide cuántas veces el sistema acertó o se equivocó al identificar clientes en riesgo.",
+    "aciertos": {
+      "etiqueta": "Clientes correctamente identificados como SANOS",
+      "valor": 28,
+      "color": "#2ecc71"
+    },
+    "alertas_correctas": {
+      "etiqueta": "Clientes en riesgo detectados a tiempo",
+      "valor": 35,
+      "color": "#3498db"
+    },
+    "falsas_alarmas": {
+      "etiqueta": "Falsas alarmas (el sistema se preocupó de más)",
+      "valor": 1,
+      "color": "#f39c12"
+    },
+    "no_detectados": {
+      "etiqueta": "Clientes en riesgo que NO se detectaron (los más peligrosos)",
+      "valor": 2,
+      "color": "#e74c3c"
+    }
+  }
+}
