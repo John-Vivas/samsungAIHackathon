@@ -327,7 +327,7 @@ const Panel = () => {
             <Bar data={recoverySummaryChartData} options={summaryChartOptions} />
           </div>
         </div>
-        <div className="glass-card p-6 rounded-3xl problem-card">
+        {/* <div className="glass-card p-6 rounded-3xl problem-card">
           <div className="roi-card-header">
             <span className="material-symbols-outlined roi-icon">insights</span>
             <span className="roi-growth">{alertItems.length} alertas críticas</span>
@@ -339,7 +339,7 @@ const Panel = () => {
           <div className="problem-chart-preview">
             <Bar data={problemChartData} options={problemChartOptions} />
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* Main Grid Section */}
