@@ -1,0 +1,70 @@
+{
+  "labels": [
+    "MOBILE",
+    "LED TV",
+    "OWM",
+    "TABLET",
+    "QLED TV",
+    "AV RECEIVER",
+    "LED MON",
+    "RTF",
+    "MWO(COMMON)",
+    "FWM"
+  ],
+  "values": [
+    5562270.0,
+    1023701.0,
+    422424.0,
+    312201.0,
+    258376.0,
+    162414.0,
+    161105.0,
+    160349.0,
+    112007.0,
+    111880.0
+  ],
+  "data": [
+    {
+      "Producto": "MOBILE",
+      "Ventas_Total": 5562270.0
+    },
+    {
+      "Producto": "LED TV",
+      "Ventas_Total": 1023701.0
+    },
+    {
+      "Producto": "OWM",
+      "Ventas_Total": 422424.0
+    },
+    {
+      "Producto": "TABLET",
+      "Ventas_Total": 312201.0
+    },
+    {
+      "Producto": "QLED TV",
+      "Ventas_Total": 258376.0
+    },
+    {
+      "Producto": "AV RECEIVER",
+      "Ventas_Total": 162414.0
+    },
+    {
+      "Producto": "LED MON",
+      "Ventas_Total": 161105.0
+    },
+    {
+      "Producto": "RTF",
+      "Ventas_Total": 160349.0
+    },
+    {
+      "Producto": "MWO(COMMON)",
+      "Ventas_Total": 112007.0
+    },
+    {
+      "Producto": "FWM",
+      "Ventas_Total": 111880.0
+    }
+  ],
+  "total_registros": 62,
+  "generado_en": "2026-05-30T00:09:31.525407"
+}

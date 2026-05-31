@@ -631,6 +631,36 @@
   align-items: flex-end;
   gap: 0.5rem;
   height: 12rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.card-sales-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 12rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.card-sales-bar {
+  width: 2.4rem;
+  min-width: 2.4rem;
+  background-color: rgba(169, 199, 255, 0.2);
+  border-radius: 0.75rem 0.75rem 0 0;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card-sales-bar:hover {
+  background-color: rgba(169, 199, 255, 0.4);
+  transform: translateY(-4px);
+}
+
+.card-sales-bar.active {
+  background-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(169, 199, 255, 0.24);
 }
 
 .card-sentiment-bar {
@@ -660,6 +690,163 @@
   font-size: var(--label-sm);
   font-weight: 500;
   color: var(--on-surface-variant);
+}
+
+.card-sales-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.card-sales-info div {
+  min-width: 50%;
+}
+
+.card-sales-info .title {
+  display: block;
+  font-weight: 700;
+  font-size: var(--label-bold);
+  color: var(--on-surface);
+  margin-bottom: 0.25rem;
+}
+
+.card-sales-info .value {
+  display: block;
+  font-size: var(--body-md);
+  color: var(--primary);
+}
+
+.card-sales-desc {
+  margin-top: 0.75rem;
+  font-size: var(--label-sm);
+  color: var(--on-surface-variant);
+}
+
+.card-annual {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .card-annual {
+    grid-column: span 6;
+  }
+}
+
+.card-annual-chart {
+  position: relative;
+  height: 18rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.card-rotation {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .card-rotation {
+    grid-column: span 6;
+  }
+}
+
+.rotation-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.rotation-pill {
+  flex: 1 1 calc(50% - 0.75rem);
+  min-width: 9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(169, 199, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--on-surface);
+  font-size: var(--label-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rotation-pill.active {
+  background-color: rgba(74, 222, 128, 0.14);
+  border-color: rgba(74, 222, 128, 0.35);
+  color: #4ade80;
+}
+
+.rotation-pill:hover {
+  transform: translateY(-1px);
+}
+
+.trend-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.trend-year-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.trend-pill {
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(169, 199, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--on-surface);
+  font-size: var(--label-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.trend-pill.active {
+  background-color: rgba(169, 199, 255, 0.16);
+  border-color: rgba(169, 199, 255, 0.4);
+  color: var(--primary);
+}
+
+.trend-metric-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--label-sm);
+  color: var(--on-surface-variant);
+}
+
+.trend-metric-select select {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--on-surface);
+  padding: 0.5rem 0.75rem;
+  outline: none;
+}
+
+.card-trend-chart {
+  position: relative;
+  height: 22rem;
+  width: 100%;
+}
+
+.card-trend {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .card-trend {
+    grid-column: span 6;
+  }
 }
 
 /* Regional Trends Map Card */

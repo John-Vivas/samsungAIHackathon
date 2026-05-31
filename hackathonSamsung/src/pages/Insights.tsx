@@ -1,19 +1,217 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import './Insights.css';
+import { Line, Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Tooltip,
+  Legend,
+  Title,
+  Filler
+} from 'chart.js';
+import ventasData from '../data/top_ventas_por_cliente.json';
+import productosData from '../data/top_ventas_por_producto.json';
+import tendenciaData from '../data/tendencia_temporal.json';
+import ventasAnoData from '../data/ventas_por_ano.json';
+import sobrestockData from '../data/sobrestock_menor_rotacion.json';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Legend, Title, Filler);
+
+interface ClienteVentas {
+  Channel: string;
+  Ventas_Total: number;
+}
+
+interface ProductoVentas {
+  Producto: string;
+  Ventas_Total: number;
+}
+
+interface TrendPeriod {
+  Periodo: string;
+  Año: string;
+  Semana: string;
+  Sell_In: number;
+  Cust_Sales: number;
+  Channel_Inv: number;
+}
+
+interface YearSales {
+  Año: string;
+  Ventas_Total: number;
+  Promedio_Semanal: number;
+  Registros: number;
+}
+
+interface LowRotationItem {
+  Producto: string;
+  Ventas_Total: number;
+  Inventario_Promedio: number;
+  Rotacion: number;
+}
 
 const Insights = () => {
   const [implemented, setImplemented] = useState<boolean>(false);
-  const [activeSentimentBar, setActiveSentimentBar] = useState<number>(3); // index of active bar (Lunes to Domingo)
+  const [activeClienteIndex, setActiveClienteIndex] = useState<number>(0);
+  const [activeProductoIndex, setActiveProductoIndex] = useState<number>(0);
+  const [selectedRotationIndex, setSelectedRotationIndex] = useState<number>(0);
+  const years = Array.from(new Set(tendenciaData.data.map((item: TrendPeriod) => item.Año))).sort();
+  const [selectedYear, setSelectedYear] = useState<string>(years[0] ?? '2023');
+  const [selectedMetric, setSelectedMetric] = useState<'Sell_In' | 'Cust_Sales' | 'Channel_Inv'>('Cust_Sales');
 
-  const sentimentBars = [
-    { day: 'Lun', height: '40%' },
-    { day: 'Mar', height: '60%' },
-    { day: 'Mié', height: '85%' },
-    { day: 'Jue', height: '100%' }, // active bar by default
-    { day: 'Vie', height: '75%' },
-    { day: 'Sáb', height: '55%' },
-    { day: 'Dom', height: '90%' }
-  ];
+  const topClientes: ClienteVentas[] = ventasData.top_clientes.slice(0, 10);
+  const maxVentas = Math.max(...topClientes.map((cliente) => cliente.Ventas_Total));
+  const customerSalesBars = topClientes.map((cliente) => ({
+    ...cliente,
+    height: `${Math.round((cliente.Ventas_Total / maxVentas) * 100)}%`
+  }));
+
+  const topProductos: ProductoVentas[] = productosData.data.slice(0, 10);
+  const maxProductoVentas = Math.max(...topProductos.map((producto) => producto.Ventas_Total));
+  const productSalesBars = topProductos.map((producto) => ({
+    ...producto,
+    height: `${Math.round((producto.Ventas_Total / maxProductoVentas) * 100)}%`
+  }));
+
+  const yearSales: YearSales[] = ventasAnoData.data;
+  const yearLabels = yearSales.map((item) => item.Año);
+  const yearValues = yearSales.map((item) => item.Ventas_Total);
+  const bestYear = yearSales.reduce((best, item) => (item.Ventas_Total > best.Ventas_Total ? item : best), yearSales[0]);
+
+  const rotationItems: LowRotationItem[] = sobrestockData.data;
+  const selectedRotation = rotationItems[selectedRotationIndex] ?? rotationItems[0];
+
+  const filteredTrend: TrendPeriod[] = tendenciaData.data.filter((item: TrendPeriod) => item.Año === selectedYear);
+  const trendTotal = filteredTrend.reduce((sum, item) => sum + item[selectedMetric], 0);
+  const trendAverage = filteredTrend.length ? trendTotal / filteredTrend.length : 0;
+
+  const trendLabels = useMemo(() => filteredTrend.map((item) => item.Periodo), [filteredTrend]);
+  const trendValues = useMemo(() => filteredTrend.map((item) => item[selectedMetric]), [filteredTrend, selectedMetric]);
+
+  const lineData = useMemo(
+    () => ({
+      labels: trendLabels,
+      datasets: [
+        {
+          label: selectedMetric,
+          data: trendValues,
+          fill: true,
+          backgroundColor: 'rgba(169, 199, 255, 0.16)',
+          borderColor: '#a9c7ff',
+          pointBackgroundColor: '#a9c7ff',
+          pointBorderColor: '#fff',
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          tension: 0.35,
+          borderWidth: 2
+        }
+      ]
+    }),
+    [trendLabels, trendValues, selectedMetric]
+  );
+
+  const lineOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          ticks: {
+            maxRotation: 45,
+            minRotation: 45,
+            autoSkip: true,
+            maxTicksLimit: 12,
+            color: '#c6c6c6'
+          },
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            color: '#c6c6c6',
+            callback: (value: number | string) => `$${Number(value).toLocaleString('es-CO')}`
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.08)'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => `${context.dataset.label}: ${context.parsed.y.toLocaleString('es-CO')}`
+          }
+        },
+        title: {
+          display: false
+        }
+      }
+    }),
+    [selectedMetric]
+  );
+
+  const annualData = useMemo(
+    () => ({
+      labels: yearLabels,
+      datasets: [
+        {
+          label: 'Ventas Totales',
+          data: yearValues,
+          backgroundColor: 'rgba(74, 222, 128, 0.35)',
+          borderColor: '#4ade80',
+          borderWidth: 2,
+          borderRadius: 18,
+          maxBarThickness: 48
+        }
+      ]
+    }),
+    [yearLabels, yearValues]
+  );
+
+  const annualOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          ticks: {
+            color: '#c6c6c6'
+          },
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            color: '#c6c6c6',
+            callback: (value: number | string) => `${Number(value).toLocaleString('es-CO')}`
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.08)'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => `${context.dataset.label}: $${context.parsed.y.toLocaleString('es-CO')}`
+          }
+        }
+      }
+    }),
+    []
+  );
 
   return (
     <main className="insights-main">
@@ -28,12 +226,14 @@ const Insights = () => {
                 <span className="insights-hero-status-text">SISTEMA OPERATIVO ACTIVO</span>
               </div>
               <h2 className="insights-hero-title pulse-slow">
-                Estrategia Comercial para el Q4 Generada
+                Analisis comercial con Graficas Exclusivas para Samsung
               </h2>
               <p className="insights-hero-description">
-                Nuestra IA ha procesado 4.2TB de datos transaccionales y de mercado para definir el roadmap táctico de este trimestre. Las oportunidades detectadas sugieren una optimización del presupuesto hacia Bogotá y categorías de alto rendimiento.
+                En este apartado  encontrara las graficas exclusivas de las ventas top y su mejores aticulos, ademas observar año por año las ventas.
               </p>
-              <div className="insights-hero-buttons">
+
+              {/*botones que no usamos */}
+             {/*<div className="insights-hero-buttons">
                 <button
                   className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-bold text-label-bold flex items-center gap-2 hover:scale-105 transition-transform"
                   onClick={() => setImplemented(true)}
@@ -45,7 +245,7 @@ const Insights = () => {
                 <button className="border border-glass-stroke text-on-surface px-8 py-4 rounded-xl font-label-bold text-label-bold hover:bg-white/5 transition-colors" style={{ background: 'transparent', cursor: 'pointer' }}>
                   Exportar Reporte Full
                 </button>
-              </div>
+              </div> */} 
 
               {implemented && (
                 <div className="implementation-success-overlay">
@@ -142,27 +342,176 @@ const Insights = () => {
             </div>
           </div>
 
-          {/* Sentiment Analysis Card */}
+          {/* Top 10 Clientes por Ventas */}
           <div className="bento-card glass-panel card-sentiment">
             <div className="card-sentiment-header">
-              <h3>Sentiment Analysis</h3>
-              <span className="card-sentiment-badge">Positivo</span>
+              <h3>Top 10 Clientes por Ventas</h3>
+              <span className="card-sentiment-badge">Cust_Sales</span>
             </div>
-            <div className="card-sentiment-chart">
-              {sentimentBars.map((bar, index) => (
+            <div className="card-sales-chart">
+              {customerSalesBars.map((cliente, index) => (
                 <div
-                  key={bar.day}
-                  className={`card-sentiment-bar ${activeSentimentBar === index ? 'active' : ''}`}
-                  style={{ height: bar.height }}
-                  onClick={() => setActiveSentimentBar(index)}
-                  title={`${bar.day}: ${bar.height}`}
+                  key={cliente.Channel}
+                  className={`card-sales-bar ${activeClienteIndex === index ? 'active' : ''}`}
+                  style={{ height: cliente.height }}
+                  onClick={() => setActiveClienteIndex(index)}
+                  title={`${cliente.Channel}: ${cliente.Ventas_Total.toLocaleString('es-CO')}`}
                 ></div>
               ))}
             </div>
-            <div className="card-sentiment-labels">
-              <span>Lunes</span>
-              <span>Domingo</span>
+            <div className="card-sales-info">
+              <div>
+                <span className="title">Cliente Principal</span>
+                <span className="value">{topClientes[activeClienteIndex].Channel}</span>
+              </div>
+              <div>
+                <span className="title">Ventas Totales</span>
+                <span className="value">{topClientes[activeClienteIndex].Ventas_Total.toLocaleString('es-CO')}</span>
+              </div>
             </div>
+            <p className="card-sales-desc">Seleccione una barra para ver el cliente con mayor venta en este top 10.</p>
+          </div>
+
+          {/* Top 10 Productos por Ventas */}
+          <div className="bento-card glass-panel card-sentiment">
+            <div className="card-sentiment-header">
+              <h3>Top 10 Productos por Ventas</h3>
+              <span className="card-sentiment-badge">Prod_Sales</span>
+            </div>
+            <div className="card-sales-chart">
+              {productSalesBars.map((producto, index) => (
+                <div
+                  key={producto.Producto}
+                  className={`card-sales-bar ${activeProductoIndex === index ? 'active' : ''}`}
+                  style={{ height: producto.height }}
+                  onClick={() => setActiveProductoIndex(index)}
+                  title={`${producto.Producto}: $${producto.Ventas_Total.toLocaleString('es-CO')}`}
+                ></div>
+              ))}
+            </div>
+            <div className="card-sales-info">
+              <div>
+                <span className="title">Producto Principal</span>
+                <span className="value">{topProductos[activeProductoIndex].Producto}</span>
+              </div>
+              <div>
+                <span className="title">Ventas Totales</span>
+                <span className="value">{topProductos[activeProductoIndex].Ventas_Total.toLocaleString('es-CO')}</span>
+              </div>
+            </div>
+            <p className="card-sales-desc">Seleccione una barra para ver el producto con mayor venta en este top 10.</p>
+          </div>
+
+          {/* Annual Sales Pulse */}
+          <div className="bento-card glass-panel card-annual">
+            <div className="card-sentiment-header">
+              <h3>Ventas por Año</h3>
+              <span className="card-sentiment-badge">Anual</span>
+            </div>
+            <div className="card-annual-chart">
+              <Bar data={annualData} options={annualOptions} />
+            </div>
+            <div className="card-sales-info">
+              <div>
+                <span className="title">Mejor Año</span>
+                <span className="value">{bestYear.Año}</span>
+              </div>
+              <div>
+                <span className="title">Ventas Totales</span>
+                <span className="value">{bestYear.Ventas_Total.toLocaleString('es-CO')}</span>
+              </div>
+              <div>
+                <span className="title">Promedio Semanal</span>
+                <span className="value">{bestYear.Promedio_Semanal.toFixed(2)}</span>
+              </div>
+            </div>
+            <p className="card-sales-desc">Una vista rápida del pulso anual y los años con mayor dinamismo comercial.</p>
+          </div>
+
+          {/* Rotación de Inventario Crítica */}
+          <div className="bento-card glass-panel card-rotation">
+            <div className="card-sentiment-header">
+              <h3>Inventario Dormido</h3>
+              <span className="card-sentiment-badge">Rotación 0</span>
+            </div>
+            <div className="rotation-list">
+              {rotationItems.map((item, index) => (
+                <button
+                  key={item.Producto}
+                  className={`rotation-pill ${selectedRotationIndex === index ? 'active' : ''}`}
+                  onClick={() => setSelectedRotationIndex(index)}
+                >
+                  <span>{item.Producto}</span>
+                  <span>{item.Inventario_Promedio.toFixed(2)}</span>
+                </button>
+              ))}
+            </div>
+            <div className="card-sales-info">
+              <div>
+                <span className="title">Producto</span>
+                <span className="value">{selectedRotation.Producto}</span>
+              </div>
+              <div>
+                <span className="title">Inventario Promedio</span>
+                <span className="value">{selectedRotation.Inventario_Promedio.toFixed(3)}</span>
+              </div>
+              <div>
+                <span className="title">Rotación</span>
+                <span className="value">{selectedRotation.Rotacion.toFixed(1)}</span>
+              </div>
+            </div>
+            <p className="card-sales-desc">Selecciona un producto para ver qué está acumulando inventario sin rotar.</p>
+          </div>
+
+          {/* Tendencia Temporal */}
+          <div className="bento-card glass-panel card-trend">
+            <div className="card-sentiment-header">
+              <h3>Tendencia Temporal</h3>
+              <span className="card-sentiment-badge">{selectedMetric}</span>
+            </div>
+            <div className="trend-filter-controls">
+              <div className="trend-year-buttons">
+                {years.map((year) => (
+                  <button
+                    key={year}
+                    className={`trend-pill ${selectedYear === year ? 'active' : ''}`}
+                    onClick={() => setSelectedYear(year)}
+                  >
+                    {year}
+                  </button>
+                ))}
+              </div>
+              <div className="trend-metric-select">
+                <label htmlFor="metric-select">Métrica:</label>
+                <select
+                  id="metric-select"
+                  value={selectedMetric}
+                  onChange={(event) => setSelectedMetric(event.target.value as 'Sell_In' | 'Cust_Sales' | 'Channel_Inv')}
+                >
+                  <option value="Cust_Sales">Cust_Sales</option>
+                  <option value="Sell_In">Sell_In</option>
+                  <option value="Channel_Inv">Channel_Inv</option>
+                </select>
+              </div>
+            </div>
+            <div className="card-trend-chart">
+              <Line data={lineData} options={lineOptions} />
+            </div>
+            <div className="card-sales-info">
+              <div>
+                <span className="title">Periodo</span>
+                <span className="value">{selectedYear}</span>
+              </div>
+              <div>
+                <span className="title">Total</span>
+                <span className="value">{trendTotal.toLocaleString('es-CO')}</span>
+              </div>
+              <div>
+                <span className="title">Promedio</span>
+                <span className="value">{Math.round(trendAverage).toLocaleString('es-CO')}%</span>
+              </div>
+            </div>
+            <p className="card-sales-desc">Filtra por año para ver la evolución semanal de la métrica seleccionada.</p>
           </div>
 
           {/* Regional Trends Map Card */}

@@ -1,0 +1,51 @@
+{
+  "labels": [
+    "OVEN(SPEED COMPACT)",
+    "MINI COMPO CD",
+    "SET BACK BOX",
+    "VCC",
+    "VTL"
+  ],
+  "values": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "data": [
+    {
+      "Producto": "OVEN(SPEED COMPACT)",
+      "Ventas_Total": 0.0,
+      "Inventario_Promedio": 0.2692307692,
+      "Rotacion": 0.0
+    },
+    {
+      "Producto": "MINI COMPO CD",
+      "Ventas_Total": 0.0,
+      "Inventario_Promedio": 0.0192307692,
+      "Rotacion": 0.0
+    },
+    {
+      "Producto": "SET BACK BOX",
+      "Ventas_Total": 0.0,
+      "Inventario_Promedio": 0.0,
+      "Rotacion": 0.0
+    },
+    {
+      "Producto": "VCC",
+      "Ventas_Total": 0.0,
+      "Inventario_Promedio": 1.1153846154,
+      "Rotacion": 0.0
+    },
+    {
+      "Producto": "VTL",
+      "Ventas_Total": 0.0,
+      "Inventario_Promedio": 0.0,
+      "Rotacion": 0.0
+    }
+  ],
+  "rotacion_global": 204094.51,
+  "alerta": "Productos con rotación por debajo del promedio global",
+  "generado_en": "2026-05-30T01:07:45.221461"
+}
