@@ -192,7 +192,7 @@ const Insights = () => {
         y: {
           ticks: {
             color: '#c6c6c6',
-            callback: (value: number | string) => `$${Number(value).toLocaleString('es-CO')}`
+            callback: (value: number | string) => `${Number(value).toLocaleString('es-CO')}`
           },
           grid: {
             color: 'rgba(255, 255, 255, 0.08)'
@@ -226,12 +226,14 @@ const Insights = () => {
                 <span className="insights-hero-status-text">SISTEMA OPERATIVO ACTIVO</span>
               </div>
               <h2 className="insights-hero-title pulse-slow">
-                Estrategia Comercial para el Q4 Generada
+                Analisis comercial con Graficas Exclusivas para Samsung
               </h2>
               <p className="insights-hero-description">
-                Nuestra IA ha procesado 4.2TB de datos transaccionales y de mercado para definir el roadmap táctico de este trimestre. Las oportunidades detectadas sugieren una optimización del presupuesto hacia Bogotá y categorías de alto rendimiento.
+                En este apartado  encontrara las graficas exclusivas de las ventas top y su mejores aticulos, ademas observar año por año las ventas.
               </p>
-              <div className="insights-hero-buttons">
+
+              {/*botones que no usamos */}
+             {/*<div className="insights-hero-buttons">
                 <button
                   className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-bold text-label-bold flex items-center gap-2 hover:scale-105 transition-transform"
                   onClick={() => setImplemented(true)}
@@ -243,7 +245,7 @@ const Insights = () => {
                 <button className="border border-glass-stroke text-on-surface px-8 py-4 rounded-xl font-label-bold text-label-bold hover:bg-white/5 transition-colors" style={{ background: 'transparent', cursor: 'pointer' }}>
                   Exportar Reporte Full
                 </button>
-              </div>
+              </div> */} 
 
               {implemented && (
                 <div className="implementation-success-overlay">

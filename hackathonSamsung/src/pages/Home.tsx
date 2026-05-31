@@ -3,10 +3,10 @@ import './Home.css';
 const productsData = [
   {
     id: 1,
-    name: 'Galaxy S24 Ultra',
-    category: 'Premium Mobile',
-    price: '$5.499.900',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6CDPtR2uEPeoB54efKAHyhgp_qVnhIBJH8QFUEn33NVEXuzdPv3NlGbNm1-wqXK6fkNXvPdo6K5x909bGJ5siXcfZsdvLNn55qPViANIWNQxe5VuG5wCh_mIexPgrXS0yhUmToyI3VOuT1bR5uhplqlWS9VMnjPWMiEc239wjHOP5SGsTjrACF_A64bD86_-r43TDjcyQiPKZRXZL0R2K83nzT9zEfSu_ntqVMCjO5qnpW5EG_qYSqvdTnP4VYhonr8_UX3RkMtI',
+    name: 'Galaxy A03 LTC',
+    category: 'Mobile',
+    price: '$499.900',
+    image: 'https://exitocol.vteximg.com.br/arquivos/ids/32506566/Celular-SAMSUNG-Galaxy-A03-Core-32-GB-Blue-3158681_a.jpg?v=639065209799500000',
     badge: 'IA Predicción: Agotándose pronto',
     badgeType: 'danger'
   },
