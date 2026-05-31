@@ -12,26 +12,25 @@ const productsData = [
   },
   {
     id: 2,
-    name: 'Samsung OLED S90C',
+    name: 'Samsung HD H5000F',
     category: 'Smart Home',
-    price: '$8.199.900',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxejtFbzFtFOkCRKBEySSl1FPl9-dHn8Rq8mb0JhM-Ui1GWhHlt4hUXdMj-tbcvyzSzqFdZFtmMewrBuYxWmL_Bkwb4zF56gmbTqyk1fDOOvSu8LsU5CeP3hyP2_GeSdvA3QHoZdSQMbfpUBYVNUGRvAp5TQWBBCX83mIDoHO_0bexHbvSYse3m1p47mX0KPokIRbI66PO2fjdcaX78mpS3PtnraPlAzuE2zCpKrqu-g31S6GrMeeTaYQVDY4cKulJFBiYfRA1R50'
+    price: '$799.900',
+    image: 'https://exitocol.vtexassets.com/arquivos/ids/29566083/ZXPP9Zn.jpg?v=638955250473700000'
   },
   {
     id: 3,
-    name: 'Galaxy Watch6 Classic',
-    category: 'Wearables',
-    price: '$1.249.900',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDC6EDNpt_SRX1LDk9ugeLfQL-kMP3C1Yvxlw3gKfYRIVloP6TE_WWF0MYdRbx2HuU6bblHZBurlPPNlNinC_iJFWbJx3xrTB7rMyWERf4TFeNrTm4vHvGEDB8-lQTLUaAs_z_V7QOO3T9Guy1jgssd6v9ujgOaBwmu3-iqtw91_S0Y2vtsFXedeeulGwZwNtjTzMURN0xPiPGn09tozBtfWkat_I3HaUwljIeDSXEHPOROZe9CwLSCJHkEomE7eZq8yM8VXcYUS8',
-    badge: 'Elección de la IA',
-    badgeType: 'ai'
+    name: 'Lavadora Bespoke Carga Superior AI Wash 13Kg',
+    category: 'Lavadora y Secdora',
+    price: '$1.426.000',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/wa70f19e7cco/gallery/co-wa80f25-574307-wa70f19e7cco-550497553?$1164_776_PNG$',
+    
   },
   {
     id: 4,
-    name: 'Galaxy Buds2 Pro',
-    category: 'Audio',
-    price: '$899.900',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCwNM-RwXONG2weAa-kSa5basKM2qCHA526Nv1DRE2Ed5CAKP2bRVgH0XKF6sMiYuET1UVYpk9Ei6qVn3lFKK1rF0lO2RB9DH2RzHU05a1X18LhCbgAL_GMCNH4L1rzf8M2eku7F9AiiDrIUiCo2O7_xeA7zHmDQ7VlqvjrZuWdAgJgIqf6RH5wdNYpjQ23RpkYUgJ7p6nki-tFVp9fU3dIKs-q2nGxjUx7fIBtZ_oImTCqjvZb7x1I6yl6k_-OjxMJxrzB_z97VTk'
+    name: 'Galaxy Tab S10 Lite',
+    category: 'Tablet',
+    price: '$1.349.910',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/sm-x400nzadcoo/gallery/co-galaxy-tab-s10-lite-sm-x406-sm-x400nzadcoo-548732252?$1164_776_PNG$'
   }
 ];
 
@@ -39,7 +38,7 @@ const Home = () => {
   const cartLinks: Record<number, string> = {
     1: 'https://www.samsung.com/co/smartphones/galaxy-a/galaxy-a07-light-violet-128gb-sm-a075mlvhltc/buy/',
     2: 'https://www.samsung.com/co/tvs/hd-tv/h5000-tv-hd-32-inch-un32h5000fkxzl/',
-    3: 'https://www.samsung.com/es/cart/odyssey-g9',
+    3: 'https://www.samsung.com/co/washers-and-dryers/washing-machines/wa80f-24-top-load-washer-ai-wash-ecobubble-ai-energy-mode-13kg-black-wa80f13s5bco/?cid=co_pd_pmax_google_shoppingreal_performance-cross_ecommerce_22804954721_pla_182156941106_conversion&gad_source=1&gad_campaignid=22804954721&gbraid=0AAAAADQAeL5UBM9wHx0YZZDN5UewTIqUF&gclid=Cj0KCQjwlerQBhDMARIsAB16H-VCY6xZN8jdZjXkeaExzPtxeaZeuhRt-8poz3OlVjyMojuMyGiUTtwaAlftEALw_wcB',
     4: 'https://www.samsung.com/es/cart/buspeak-buds'
   };
 
