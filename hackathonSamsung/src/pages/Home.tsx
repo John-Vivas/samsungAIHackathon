@@ -36,6 +36,25 @@ const productsData = [
 ];
 
 const Home = () => {
+  const cartLinks: Record<number, string> = {
+    1: 'https://www.samsung.com/co/smartphones/galaxy-a/galaxy-a07-light-violet-128gb-sm-a075mlvhltc/buy/',
+    2: 'https://www.samsung.com/co/tvs/hd-tv/h5000-tv-hd-32-inch-un32h5000fkxzl/',
+    3: 'https://www.samsung.com/es/cart/odyssey-g9',
+    4: 'https://www.samsung.com/es/cart/buspeak-buds'
+  };
+
+  const handleCartClick = (id: number) => {
+    if (id === 1) {
+      const accepted = window.confirm('El producto está agotado');
+      if (accepted) {
+        window.location.href = 'https://www.samsung.com/co/smartphones/galaxy-a/galaxy-a07-light-violet-128gb-sm-a075mlvhltc/buy/';
+      }
+      return;
+    }
+    // Para los demás productos, ir a su link específico
+    const link = cartLinks[id] || 'https://www.samsung.com';
+    window.location.href = link;
+  };
   return (
     <>
       <main>
@@ -121,7 +140,7 @@ const Home = () => {
                   <h4 className="product-name">{product.name}</h4>
                   <div className="product-footer">
                     <span className="product-price">{product.price}</span>
-                    <button className="product-add-btn">
+                    <button className="product-add-btn" onClick={() => handleCartClick(product.id)}>
                       <span className="material-symbols-outlined">add_shopping_cart</span>
                     </button>
                   </div>
