@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 const productsData = [
   {
     id: 1,
-    name: 'Galaxy S24 Ultra',
-    category: 'Móviles',
+    name: 'Oven Compact',
+    category: 'Hogar',
     price: 1349000,
     priceOld: 1499000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0uiceiBLn6I9VY9W8LLwiDIqM9Bt_3kpq9En2jAdg2x2znzPX3XToz2s-snPUEOaR0U2RA9NzlXAgUlWS_-ZwZW_0PvFQMz6qzOxpm3KmxgHiepXn01uIWZ7tpBdAb9a2AfSIOjYc1BDPNlbQCdrtiaYryC-b3GjwES1Drzz3d6Dtv8QVdV2HgjG5q3nmOc-CPgdhmhN6nfJKsxKjsbPA7mhCQnqZX-JVHlL0ASWQxx1Q7vM6GUPdMhZHrw',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/levant/nq5b4353fbk-u4/gallery/levant-nq7000b-nq5b4553fbs-nq5b4353fbk-u4-535824473?$1164_776_PNG$',
     aiScore: 98,
     badge: 'Puntaje IA: 98%',
     trend: 'Tendencia en tu Región',
@@ -17,109 +17,103 @@ const productsData = [
   },
   {
     id: 2,
-    name: 'Galaxy Buds3 Pro',
+    name: 'MINI COMPO CD',
     category: 'Accesorios',
-    price: 199000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ujG8rLsgUMcTiHV_31MODr-yghZWDPxvKZ0T-Qxf_iUi2LFQvR4WON0w4TtMragsuizFjmLdBGksao_TkxKJjHxnmwSdT3ps3UVrSf6pZwQAWbsKR6jCRCXubIEvir0Yw_H5yWlT_AT8tiOfGOG5Ggup4B7bYzqlhaNWYICjo7GOfRilWIm1j1vOJUENm9NC6ZJC9cjcBHI1hKu4b-wrWyN-DRpDbtKeGvKuMjqaKta5shH0nfFlrRRDg',
+    price: 1199000,
+    image: 'https://images.samsung.com/is/image/samsung/co-mini-audio-system-j630-mx-j630-zx-001-front-black?$330_330_JPG$',
     badge: 'Bundle Recomendado',
     stock: 42,
     performance: 'high'
   },
   {
     id: 3,
-    name: 'Odyssey OLED G9',
-    category: 'Monitores',
+    name: 'SET BACK BOX',
+    category: 'Asesorios',
     price: 1799000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ugaRRugYqnUmL4VoU-rL58vbxBXev5sNejm4rjesWLireYGP85dFveH9A_aRvzk2TFC1hUYvWg3r_sP5VK3AVYgMBFybdg---z3a1txPPA_loqyqDpnHSiFTgv4kZ1dXv6aIlB8AqNAVMZ2VqnJCZxirqwggn-6XD6sZjNoVWR6FqWpY1Us9DYCtjIZuet3y0Kt8CxuLAU-7gaWnFj_F7XrDhbEBDUwP-s4-N-qQbITdK7BbQVZx1REBw',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/nz/sbb-ss08nu1xxy/gallery/nz-sbb-ssnu-sbb-ss08nu1xxy-538647006?$Q90_684_547_JPG$',
     badge: 'Precio Optimizado por IA',
     ai: true,
     performance: 'medium'
   },
   {
     id: 4,
-    name: 'Bespoke 4-Door Flex',
+    name: 'VCC Lavadora Secadora Bespoke AI Laundry Combo',
     category: 'Hogar',
-    price: 3299000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0uhr_kxtXs4UIoU3zpKlCYWOKMaRMDKlyAseXUePI7eT-9DO93axHfjS5twNlbv1mxMhlGa5Evtl0kEzfgPbxOxznVwpo1YQQFcJKOnzg8yLfKeV2_7AdVrhSwRb99kKN7MD0BrtP19VkIsFkq-HBcQthY_02JIBE6wR0Yi-Hi4ANULsYmtaaUODtyBfch1yOBLC3NUCFZabYHKZ5XlckB8qGSJQnN_mz9LlP29zHk-p0g2BY1tVLi48oec',
+    price: 6929145,
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/wd26db8995bzco/gallery/co-wd8000dk-wd26db8995bzco-542309490?$1164_776_PNG$',
     stock: 'Bajo Stock',
     performance: 'low'
   },
   {
     id: 5,
-    name: 'Galaxy Z Fold5',
-    category: 'Móviles',
+    name: 'VTL',
+    category: 'HOGAR',
     price: 1999000,
     priceOld: 2199000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0uiceiBLn6I9VY9W8LLwiDIqM9Bt_3kpq9En2jAdg2x2znzPX3XToz2s-snPUEOaR0U2RA9NzlXAgUlWS_-ZwZW_0PvFQMz6qzOxpm3KmxgHiepXn01uIWZ7tpBdAb9a2AfSIOjYc1BDPNlbQCdrtiaYryC-b3GjwES1Drzz3d6Dtv8QVdV2HgjG5q3nmOc-CPgdhmhN6nfJKsxKjsbPA7mhCQnqZX-JVHlL0ASWQxx1Q7vM6GUPdMhZHrw',
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/ac024dxadkg-cb/gallery/co-ac5000b-ac024dxadkg-cb-548055852?$Q90_684_547_JPG$',
     aiScore: 92,
-    badge: 'Puntaje IA: 92%',
     performance: 'high'
   },
   {
     id: 6,
-    name: 'Neo QLED 8K 65"',
-    category: 'Hogar',
-    price: 4999000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ugaRRugYqnUmL4VoU-rL58vbxBXev5sNejm4rjesWLireYGP85dFveH9A_aRvzk2TFC1hUYvWg3r_sP5VK3AVYgMBFybdg---z3a1txPPA_loqyqDpnHSiFTgv4kZ1dXv6aIlB8AqNAVMZ2VqnJCZxirqwggn-6XD6sZjNoVWR6FqWpY1Us9DYCtjIZuet3y0Kt8CxuLAU-7gaWnFj_F7XrDhbEBDUwP-s4-N-qQbITdK7BbQVZx1REBw',
-    badge: 'Premium',
-    performance: 'high'
+    name: 'Galaxy A03 LTC',
+    category: 'Móviles',
+    price: 499900,
+    image: 'https://exitocol.vteximg.com.br/arquivos/ids/32506566/Celular-SAMSUNG-Galaxy-A03-Core-32-GB-Blue-3158681_a.jpg?v=639065209799500000',
+    badge: 'IA Predicción: Agotándose pronto',
+    badgeType: 'danger'
   },
   {
     id: 7,
-    name: 'Galaxy Watch6 Classic',
-    category: 'Accesorios',
-    price: 449000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ujG8rLsgUMcTiHV_31MODr-yghZWDPxvKZ0T-Qxf_iUi2LFQvR4WON0w4TtMragsuizFjmLdBGksao_TkxKJjHxnmwSdT3ps3UVrSf6pZwQAWbsKR6jCRCXubIEvir0Yw_H5yWlT_AT8tiOfGOG5Ggup4B7bYzqlhaNWYICjo7GOfRilWIm1j1vOJUENm9NC6ZJC9cjcBHI1hKu4b-wrWyN-DRpDbtKeGvKuMjqaKta5shH0nfFlrRRDg',
-    aiScore: 85,
-    performance: 'medium'
+    name: 'Samsung HD H5000F',
+    category: 'Smart Home',
+    price: 799900,
+    image: 'https://exitocol.vtexassets.com/arquivos/ids/29566083/ZXPP9Zn.jpg?v=638955250473700000'
   },
   {
     id: 8,
-    name: 'Odyssey OLED G8',
-    category: 'Monitores',
-    price: 999000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ugaRRugYqnUmL4VoU-rL58vbxBXev5sNejm4rjesWLireYGP85dFveH9A_aRvzk2TFC1hUYvWg3r_sP5VK3AVYgMBFybdg---z3a1txPPA_loqyqDpnHSiFTgv4kZ1dXv6aIlB8AqNAVMZ2VqnJCZxirqwggn-6XD6sZjNoVWR6FqWpY1Us9DYCtjIZuet3y0Kt8CxuLAU-7gaWnFj_F7XrDhbEBDUwP-s4-N-qQbITdK7BbQVZx1REBw',
-    badge: 'Gaming Pro',
-    performance: 'high'
+    name: 'Lavadora Bespoke Carga Superior AI Wash 13Kg',
+    category: 'Lavadora y Secdora',
+    price: 1426000,
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/wa70f19e7cco/gallery/co-wa80f25-574307-wa70f19e7cco-550497553?$1164_776_PNG$',
+    
   },
   {
     id: 9,
-    name: 'Galaxy A54',
-    category: 'Móviles',
-    price: 449000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0uiceiBLn6I9VY9W8LLwiDIqM9Bt_3kpq9En2jAdg2x2znzPX3XToz2s-snPUEOaR0U2RA9NzlXAgUlWS_-ZwZW_0PvFQMz6qzOxpm3KmxgHiepXn01uIWZ7tpBdAb9a2AfSIOjYc1BDPNlbQCdrtiaYryC-b3GjwES1Drzz3d6Dtv8QVdV2HgjG5q3nmOc-CPgdhmhN6nfJKsxKjsbPA7mhCQnqZX-JVHlL0ASWQxx1Q7vM6GUPdMhZHrw',
-    badge: 'Mejor Relación P/C',
-    performance: 'medium'
+    name: 'Galaxy Tab S10 Lite',
+    category: 'Tablet',
+    price: 1349910,
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/sm-x400nzadcoo/gallery/co-galaxy-tab-s10-lite-sm-x406-sm-x400nzadcoo-548732252?$1164_776_PNG$'
   },
   {
     id: 10,
-    name: 'Bespoke Lavadora',
-    category: 'Hogar',
+    name: 'DVM S Water, estándar',
+    category: 'Accesorios',
     price: 1199000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0uhr_kxtXs4UIoU3zpKlCYWOKMaRMDKlyAseXUePI7eT-9DO93axHfjS5twNlbv1mxMhlGa5Evtl0kEzfgPbxOxznVwpo1YQQFcJKOnzg8yLfKeV2_7AdVrhSwRb99kKN7MD0BrtP19VkIsFkq-HBcQthY_02JIBE6wR0Yi-Hi4ANULsYmtaaUODtyBfch1yOBLC3NUCFZabYHKZ5XlckB8qGSJQnN_mz9LlP29zHk-p0g2BY1tVLi48oec',
+    image: 'https://images.samsung.com/is/image/samsung/co-ac-dvm-amxxxhxwafr-am192hxwafr-aa-001-front-white-51816165?$Q90_684_547_JPG$',
     performance: 'medium'
   },
   {
     id: 11,
-    name: 'Galaxy Tab S9',
-    category: 'Accesorios',
-    price: 799000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ujG8rLsgUMcTiHV_31MODr-yghZWDPxvKZ0T-Qxf_iUi2LFQvR4WON0w4TtMragsuizFjmLdBGksao_TkxKJjHxnmwSdT3ps3UVrSf6pZwQAWbsKR6jCRCXubIEvir0Yw_H5yWlT_AT8tiOfGOG5Ggup4B7bYzqlhaNWYICjo7GOfRilWIm1j1vOJUENm9NC6ZJC9cjcBHI1hKu4b-wrWyN-DRpDbtKeGvKuMjqaKta5shH0nfFlrRRDg',
+    name: 'QLED',
+    category: 'Televisores',
+    price: 12990000,
+    image: 'https://images.samsung.com/is/image/samsung/p6pim/co/qn43q65bakxzl/gallery/co-qled-q60b-qn43q65bakxzl-531990106?$Q90_684_547_JPG$',
     badge: 'Tablet Premium',
     performance: 'high'
   },
   {
     id: 12,
-    name: 'Galaxy Buds2',
+    name: 'MINI MX T70',
     category: 'Accesorios',
-    price: 149000,
-    image: 'https://lh3.googleusercontent.com/aida/ADBb0ujG8rLsgUMcTiHV_31MODr-yghZWDPxvKZ0T-Qxf_iUi2LFQvR4WON0w4TtMragsuizFjmLdBGksao_TkxKJjHxnmwSdT3ps3UVrSf6pZwQAWbsKR6jCRCXubIEvir0Yw_H5yWlT_AT8tiOfGOG5Ggup4B7bYzqlhaNWYICjo7GOfRilWIm1j1vOJUENm9NC6ZJC9cjcBHI1hKu4b-wrWyN-DRpDbtKeGvKuMjqaKta5shH0nfFlrRRDg',
+    price: 1349000,
+    image: 'https://images.samsung.com/is/image/samsung/co-giga-party-audio-mx-t70-mx-t70-zl-frontblack-216635193?$1164_776_PNG$',
     stock: 120,
     performance: 'high'
   }
 ];
 
-const categories = ['Móviles', 'Monitores', 'Hogar', 'Accesorios'];
+const categories = ['Móviles', 'Telvisores', 'Hogar', 'Accesorios'];
 const filterTypes = ['Rendimiento en Ventas', 'Predicción de Stock', 'Margen de Beneficio IA'];
 
 const Productos = () => {
