@@ -1,0 +1,51 @@
+{
+  "_descripcion": "Distribución de tipos de problema. Útil para gráfico de donut o barras y para entender la causa raíz.",
+  "titulo": "¿Qué le está pasando al canal?",
+  "subtitulo": "Tipos de problema detectados en los clientes analizados",
+  "diagnosticos": [
+    {
+      "tipo": "SANO",
+      "etiqueta": "Saludable",
+      "clientes": 31,
+      "porcentaje": "47.0%",
+      "color": "#2ecc71",
+      "que_significa": "Vende bien, tiene inventario y recibe producto normalmente.",
+      "que_hacer": "Mantener la relación comercial actual.",
+      "alerta": true,
+      "mensaje_alerta": "Más del 30% del canal tiene este problema. Requiere atención inmediata."
+    },
+    {
+      "tipo": "SIN_SUMINISTRO",
+      "etiqueta": "No recibe producto",
+      "clientes": 30,
+      "porcentaje": "45.5%",
+      "color": "#8e44ad",
+      "que_significa": "El producto no está llegando desde el proveedor.",
+      "que_hacer": "Revisar cadena de suministro y confirmación de pedidos.",
+      "alerta": true,
+      "mensaje_alerta": "Más del 30% del canal tiene este problema. Requiere atención inmediata."
+    },
+    {
+      "tipo": "CHURN_REAL",
+      "etiqueta": "Fuga real",
+      "clientes": 4,
+      "porcentaje": "6.1%",
+      "color": "#e74c3c",
+      "que_significa": "Tiene inventario pero ya no está vendiendo. Posible cambio a otro proveedor.",
+      "que_hacer": "Llamar al cliente para entender qué pasó y ofrecer una solución comercial.",
+      "alerta": false,
+      "mensaje_alerta": ""
+    },
+    {
+      "tipo": "DESABASTECIMIENTO",
+      "etiqueta": "Sin inventario",
+      "clientes": 1,
+      "porcentaje": "1.5%",
+      "color": "#e67e22",
+      "que_significa": "No puede vender porque no tiene producto en stock.",
+      "que_hacer": "Coordinar con logística para envío urgente de producto.",
+      "alerta": false,
+      "mensaje_alerta": ""
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "_descripcion": "Clientes que dejaron de comprar en 2025 pero tienen historial valioso. Priorizados por potencial de recuperación.",
+  "titulo": "Clientes que pueden volver",
+  "subtitulo": "Estos clientes ya no compran, pero aún pueden recuperarse con la acción correcta",
+  "resumen": {
+    "total_recuperables": 24,
+    "valor_total": "107,341 unidades",
+    "prioridad_alta": 2,
+    "prioridad_media": 21,
+    "prioridad_baja": 1,
+    "mensaje": "Hay 24 clientes con potencial de recuperación que representan 107,341 unidades históricas en ventas."
+  },
+  "clientes": [
+    {
+      "cliente": "CUSTOMER77",
+      "estado": "Inactivo en 2025",
+      "ventas_historicas": "60,730 unidades",
+      "ventas_num": 60730.0,
+      "productos": 2,
+      "ultima_compra": "202452",
+      "prioridad": "ALTA",
+      "prioridad_color": "#e74c3c",
+      "plazo_contacto": "Llamar hoy",
+      "por_que_recuperar": "Cliente de alto valor histórico. Alta posibilidad de retorno con oferta especial.",
+      "como_recuperar": "Llamar al cliente y ofrecer descuento especial"
+    },
+    {
+      "cliente": "CUSTOMER67",
+      "estado": "Inactivo en 2025",
+      "ventas_historicas": "34,082 unidades",
+      "ventas_num": 34082.0,
+      "productos": 27,
+      "ultima_compra": "202452",
+      "prioridad": "ALTA",
+      "prioridad_color": "#e74c3c",
+      "plazo_contacto": "Llamar hoy",
+      "por_que_recuperar": "Cliente de alto valor histórico. Alta posibilidad de retorno con oferta especial.",
+      "como_recuperar": "Llamar al cliente y ofrecer descuento especial"
+    },
+    {
+      "cliente": "CUSTOMER23",
+      "estado": "Inactivo en 2025",
+      "ventas_historicas": "3,839 unidades",
+      "ventas_num": 3839.0,
+      "productos": 2,
+      "ultima_compra": "202533",
+      "prioridad": "MEDIA",
+      "prioridad_color": "#f39c12",
+      "plazo_contacto": "Contactar esta semana",
+      "por_que_recuperar": "Buen historial. Un descuento o promoción puede reactivarlo.",
+      "como_recuperar": "Contactar y ofrecer promoción de reactivación"
+    }
+  ]
+}

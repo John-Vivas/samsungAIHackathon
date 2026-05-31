@@ -1,5 +1,24 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import './Panel.css';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Tooltip,
+  Legend,
+  Title
+} from 'chart.js';
+
+import resumenData from '../data/resumen_ejecutivo.json';
+import clientesRiesgoData from '../data/clientes_en_riesgo.json';
+import tiposProblemaData from '../data/tipos_de_problema.json';
+import clientesRecuperablesData from '../data/clientes_recuperables.json';
+import planAccionData from '../data/plan_de_accion.json';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Tooltip, Legend, Title);
 
 const inventoryData = [
   {
@@ -41,13 +60,69 @@ const Panel = () => {
   // Simulator range value state
   const [adSpend, setAdSpend] = useState<number>(50);
 
-  // Automation switch states
-  const [pricingActive, setPricingActive] = useState<boolean>(true);
-  const [restockActive, setRestockActive] = useState<boolean>(false);
-
   // Dynamic calculations based on slider
   const projectedSales = (12.0 + adSpend / 10).toFixed(1);
   const projectedMargin = (-1.0 - adSpend / 45).toFixed(1);
+
+  const reliability = resumenData.confiabilidad_modelo;
+  const riskCards = resumenData.resumen_clientes.tarjetas;
+  const problemItems = tiposProblemaData.diagnosticos;
+  const alertItems = problemItems.filter((item) => item.alerta);
+  const recoverySummary = clientesRecuperablesData.resumen;
+  const topRiskClients = clientesRiesgoData.clientes.slice(0, 4);
+  const planActions = planAccionData.acciones;
+
+  const problemChartData = useMemo(
+    () => ({
+      labels: problemItems.map((item) => item.etiqueta),
+      datasets: [
+        {
+          label: 'Clientes con problema',
+          data: problemItems.map((item) => item.clientes),
+          backgroundColor: problemItems.map((item) => item.color),
+          borderRadius: 12,
+          barThickness: 22
+        }
+      ]
+    }),
+    [problemItems]
+  );
+
+  const problemChartOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          ticks: {
+            color: '#c6c6c6'
+          },
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            color: '#c6c6c6'
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.08)'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => `${context.parsed.y} clientes`
+          }
+        }
+      }
+    }),
+    []
+  );
 
   return (
     <main className="panel-main">
@@ -67,52 +142,78 @@ const Panel = () => {
 
       {/* Top Level Metrics (Bento Style) */}
       <section className="metrics-grid">
-        {/* ROI Campaign Card */}
         <div className="glass-card roi-card p-6 rounded-3xl">
           <div className="roi-card-header">
-            <span className="material-symbols-outlined roi-icon">rocket_launch</span>
-            <span className="roi-growth">+24.8% vs mes ant.</span>
+            <span className="material-symbols-outlined roi-icon">shield_moon</span>
+            <span className="roi-growth">AUC {reliability.auc}</span>
           </div>
           <div>
-            <p className="metric-label">ROI Campañas IA Generativas</p>
-            <h3 className="metric-value">12.4x</h3>
+            <p className="metric-label">Confianza del modelo de riesgo</p>
+            <h3 className="metric-value">{reliability.valor}</h3>
+            <p className="metric-subtext-muted" style={{ marginTop: '0.5rem' }}>
+              {reliability.detalle}
+            </p>
           </div>
-          <div className="roi-graph">
+          {/* <div className="roi-graph">
             <div className="roi-graph-bars">
-              <div className="roi-graph-bar" style={{ height: '20%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '35%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '30%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '55%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '45%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '70%' }}></div>
-              <div className="roi-graph-bar" style={{ height: '85%' }}></div>
+              <div className="roi-graph-bar" style={{ height: '56%' }}></div>
+              <div className="roi-graph-bar" style={{ height: '64%' }}></div>
+              <div className="roi-graph-bar" style={{ height: '72%' }}></div>
+              <div className="roi-graph-bar" style={{ height: '94%' }}></div>
+              <div className="roi-graph-bar" style={{ height: '81%' }}></div>
+            </div>
+          </div> */}
+        </div>
+
+        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between summary-card">
+          <div>
+            <p className="metric-label">Clientes en riesgo</p>
+            <h3 className="metric-value-medium">{resumenData.resumen_clientes.total_analizados}</h3>
+          </div>
+          <div className="risk-pill-list">
+            {riskCards.map((card) => (
+              <div key={card.nivel} className="risk-pill" style={{ borderColor: card.color }}>
+                <span>{card.nivel}</span>
+                <strong>{card.clientes}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between summary-card">
+          <div>
+            <p className="metric-label">Clientes recuperables</p>
+            <h3 className="metric-value-medium">{recoverySummary.total_recuperables}</h3>
+          </div>
+          <div className="risk-pill-list">
+            <div className="risk-pill" style={{ borderColor: '#e74c3c' }}>
+              <span>Alta prioridad</span>
+              <strong>{recoverySummary.prioridad_alta}</strong>
+            </div>
+            <div className="risk-pill" style={{ borderColor: '#f39c12' }}>
+              <span>Media prioridad</span>
+              <strong>{recoverySummary.prioridad_media}</strong>
+            </div>
+            <div className="risk-pill" style={{ borderColor: '#2ecc71' }}>
+              <span>Baja prioridad</span>
+              <strong>{recoverySummary.prioridad_baja}</strong>
             </div>
           </div>
         </div>
-
-        {/* CLV Metric Card */}
-        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between">
+{/* 
+        <div className="glass-card p-6 rounded-3xl problem-card">
+          <div className="roi-card-header">
+            <span className="material-symbols-outlined roi-icon">insights</span>
+            <span className="roi-growth">{alertItems.length} alertas críticas</span>
+          </div>
           <div>
-            <p className="metric-label">Customer Lifetime Value (CLV)</p>
-            <h3 className="metric-value-medium">$2,840</h3>
+            <p className="metric-label">Tipos de problema detectados</p>
+            <h2 className="metric-value">{problemItems.reduce((sum, item) => sum + item.clientes, 0)} clientes</h2>
           </div>
-          <div className="metric-subtext-container">
-            <span className="material-symbols-outlined metric-subtext-icon-up">trending_up</span>
-            <span className="metric-subtext-primary">Predicción optimizada por IA</span>
+          <div className="problem-chart-preview">
+            <Bar data={problemChartData} options={problemChartOptions} />
           </div>
-        </div>
-
-        {/* CAC Metric Card */}
-        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between" style={{ borderLeft: '4px solid var(--primary)' }}>
-          <div>
-            <p className="metric-label">Costo Adquisición (CAC)</p>
-            <h3 className="metric-value-medium">$142.50</h3>
-          </div>
-          <div className="metric-subtext-container">
-            <span className="material-symbols-outlined metric-subtext-icon-down">arrow_downward</span>
-            <span className="metric-subtext-muted">Reducción del 12% este Q</span>
-          </div>
-        </div>
+        </div> */}
       </section>
 
       {/* Main Grid Section */}
@@ -222,74 +323,83 @@ const Panel = () => {
 
         {/* Right side column */}
         <div className="dashboard-side-col">
-          {/* Automation controls */}
-          <div className="glass-card p-6 rounded-3xl">
-            <div className="automation-header">
-              <h4 className="automation-title">Automatización</h4>
-              <div className="pulse-container">
-                <span className="pulse-ring"></span>
-                <span className="pulse-dot"></span>
+          <div className="glass-card p-6 rounded-3xl problem-summary-card">
+          <div className="card-header-actions">
+            <div className="card-title-group">
+              <h3>Tipos de problema detectados</h3>
+              <p>Distribución de casos por diagnóstico de canal.</p>
+            </div>
+          </div>
+          <div className="problem-summary-list">
+            {problemItems.map((item) => (
+              <div key={item.tipo} className="problem-summary-item">
+                <div className="problem-summary-meta">
+                  <span className="problem-dot" style={{ backgroundColor: item.color }}></span>
+                  <div>
+                    <p className="problem-summary-label">{item.etiqueta}</p>
+                    <p className="problem-summary-desc">{item.que_significa}</p>
+                  </div>
+                </div>
+                <div className="problem-summary-stats">
+                  <strong>{item.clientes}</strong>
+                  <span>{item.porcentaje}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="problem-summary-callout">
+            <span className="material-symbols-outlined">warning</span>
+            <p>Prioriza primero los problemas con alerta y mayor impacto en el canal.</p>
+          </div>
+        </div>
+
+          <div className="glass-card p-6 rounded-3xl risk-card">
+            <div className="card-header-actions">
+              <div className="card-title-group">
+                <h3>Top Clientes en Riesgo</h3>
+                <p>Selección prioritaria según probabilidad y diagnóstico.</p>
               </div>
             </div>
-            <div className="automation-toggles">
-              <div className="toggle-switch-container">
-                <div className="toggle-switch-info">
-                  <p className="title">Precios Algorítmicos</p>
-                  <p className="desc">Optimización dinámica 24/7</p>
+            <div className="risk-table">
+              {topRiskClients.map((client) => (
+                <div className="risk-row" key={client.cliente}>
+                  <div>
+                    <p className="risk-client">{client.cliente}</p>
+                    <p className="risk-detail">{client.nivel}</p>
+                  </div>
+                  <div className="risk-chip" style={{ borderColor: client.diagnostico_color, color: client.diagnostico_color }}>
+                    {client.diagnostico}
+                  </div>
                 </div>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    checked={pricingActive}
-                    onChange={(e) => setPricingActive(e.target.checked)}
-                  />
-                  <span className="slider-round"></span>
-                </label>
-              </div>
-
-              <div className="toggle-switch-container">
-                <div className="toggle-switch-info">
-                  <p className="title">Re-stock Automático</p>
-                  <p className="desc">Solo para categorías A/B</p>
-                </div>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    checked={restockActive}
-                    onChange={(e) => setRestockActive(e.target.checked)}
-                  />
-                  <span className="slider-round"></span>
-                </label>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Actionable Insights Card */}
-          <div className="glass-card p-6 rounded-3xl">
-            <h4 className="automation-title mb-6">Próximos Pasos (IA Insights)</h4>
-            <div className="insights-list">
-              <div className="insight-action-item">
-                <div className="insight-action-header">
-                  <span className="material-symbols-outlined insight-action-icon">lightbulb</span>
-                  <p className="insight-action-title">Optimizar Envío en CDMX</p>
-                </div>
-                <p className="insight-action-desc">
-                  Detectamos retrasos de 4h en última milla. Recomendamos activar Hub secundario.
-                </p>
-              </div>
-              <div className="insight-action-item">
-                <div className="insight-action-header">
-                  <span className="material-symbols-outlined insight-action-icon">warning</span>
-                  <p className="insight-action-title">Anomalía de Precio</p>
-                </div>
-                <p className="insight-action-desc">
-                  Competencia bajó 12% en pantallas QLED. ¿Deseas igualar margen?
-                </p>
+          {/* Action Plan Card */}
+          <div className="glass-card p-6 rounded-3xl plan-card">
+            <div className="card-header-actions">
+              <div className="card-title-group">
+                <h3>{planAccionData.titulo}</h3>
+                <p>{planAccionData.subtitulo}</p>
               </div>
             </div>
-            <button className="insights-view-all-btn">
-              Ver todos los insights (12)
-            </button>
+            <div className="plan-step-list">
+              {planActions.map((action) => (
+                <div className="plan-step-item" key={action.plazo}>
+                  <div className="plan-step-badge" style={{ backgroundColor: action.color }}>
+                    {action.icono}
+                  </div>
+                  <div>
+                    <p className="plan-step-title">{action.plazo}</p>
+                    <ul>
+                      {action.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Strategic Summary Image Card */}

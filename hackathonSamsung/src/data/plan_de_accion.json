@@ -1,0 +1,61 @@
+{
+  "_descripcion": "Plan de acción en lenguaje claro. Ideal para mostrar como checklist o tarjetas de tareas en el dashboard.",
+  "titulo": "¿Qué hacer ahora?",
+  "subtitulo": "Plan de acción basado en el análisis de clientes",
+  "acciones": [
+    {
+      "plazo": "HOY (24-48 horas)",
+      "color": "#e74c3c",
+      "icono": "🚨",
+      "items": [
+        "Contactar a 31 clientes en nivel CRÍTICO — tienen más del 70% de probabilidad de irse.",
+        "Priorizar clientes con diagnóstico 'Fuga real' (CHURN_REAL) — tienen inventario pero dejaron de vender.",
+        "Valor en juego: 120 unidades en las próximas 4 semanas."
+      ]
+    },
+    {
+      "plazo": "ESTA SEMANA (próximos 7 días)",
+      "color": "#f39c12",
+      "icono": "📋",
+      "items": [
+        "Monitorear a 6 clientes en nivel MEDIO — pueden escalar a crítico.",
+        "Clientes con diagnóstico 'Sin inventario': coordinar con logística para reabastecimiento urgente.",
+        "Clientes con diagnóstico 'No recibe producto': revisar órdenes de compra y cadena de suministro.",
+        "Valor monitoreado: 10 unidades."
+      ]
+    },
+    {
+      "plazo": "ESTE MES (recuperación)",
+      "color": "#3498db",
+      "icono": "🔄",
+      "items": [
+        "Contactar a 2 clientes de alta prioridad que ya dejaron de comprar.",
+        "Contactar a 21 clientes de prioridad media con oferta de reactivación.",
+        "Valor recuperable estimado: 107,341 unidades históricas.",
+        "Lanzar campaña de email para clientes de baja prioridad."
+      ]
+    }
+  ],
+  "metricas_clave": [
+    {
+      "etiqueta": "Precisión del sistema",
+      "valor": "95.5%",
+      "descripcion": "De cada 100 alertas, esta cantidad son correctas"
+    },
+    {
+      "etiqueta": "Clientes en riesgo HOY",
+      "valor": "31",
+      "descripcion": "Requieren contacto inmediato"
+    },
+    {
+      "etiqueta": "Unidades en riesgo",
+      "valor": "120",
+      "descripcion": "Proyectadas para las próximas 4 semanas"
+    },
+    {
+      "etiqueta": "Clientes recuperables",
+      "valor": "24",
+      "descripcion": "Inactivos con potencial de reactivación"
+    }
+  ]
+}
