@@ -272,7 +272,7 @@ const Insights = () => {
         {/* Bento Grid Insights */}
         <section className="insights-grid">
           {/* Monitor Insights Card */}
-          <div className="bento-card glass-panel card-monitor">
+          {/* <div className="bento-card glass-panel card-monitor">
             <div className="card-monitor-header">
               <div className="card-monitor-icon-bg">
                 <span className="material-symbols-outlined">trending_up</span>
@@ -292,10 +292,10 @@ const Insights = () => {
                 alt="Samsung Monitor de alta gama"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Actionable Insight Card */}
-          <div className="bento-card glass-panel card-actionable">
+          {/* <div className="bento-card glass-panel card-actionable">
             <span className="material-symbols-outlined card-actionable-bg-icon">location_on</span>
             <div className="card-actionable-badge">
               <span className="material-symbols-outlined">campaign</span>
@@ -322,10 +322,10 @@ const Insights = () => {
               </div>
               <p className="card-actionable-progress-label">Confianza de IA: 92%</p>
             </div>
-          </div>
+          </div> */}
 
           {/* Audience ID Card */}
-          <div className="bento-card glass-panel card-audience" style={{ backgroundColor: 'rgba(59, 144, 255, 0.05)' }}>
+          {/* <div className="bento-card glass-panel card-audience" style={{ backgroundColor: 'rgba(59, 144, 255, 0.05)' }}>
             <div className="card-audience-header">
               <span className="material-symbols-outlined">group</span>
               <h4>AUDIENCIA OBJETIVO</h4>
@@ -340,7 +340,7 @@ const Insights = () => {
                 <span className="desc">Ecosistema SmartThings</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Top 10 Clientes por Ventas */}
           <div className="bento-card glass-panel card-sentiment">
@@ -515,7 +515,7 @@ const Insights = () => {
           </div>
 
           {/* Regional Trends Map Card */}
-          <div className="bento-card glass-panel card-regional">
+          {/* <div className="bento-card glass-panel card-regional">
             <h3 className="card-regional-title">Regional Trends</h3>
             <div className="card-regional-map-container">
               <div className="card-regional-map-wrapper">
@@ -533,7 +533,7 @@ const Insights = () => {
                 <p className="desc">+42% actividad vs Octubre</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
 

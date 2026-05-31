@@ -23,72 +23,124 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Tooltip, 
 const inventoryData = [
   {
     id: 1,
-    name: 'Galaxy S24 Ultra',
-    category: 'Electrónica',
-    stock: 1240,
-    prediction: '+15%',
-    fillWidth: '82%',
-    status: 'SALUDABLE',
-    statusClass: 'healthy',
+    name: 'SM-A022M',
+    category: 'MOBILE',
+    stock: 1,
+    prediction: 'Riesgo inminente (1.1 semanas)',
+    fillWidth: '3%',
+    status: 'CRÍTICO',
+    statusClass: 'restock',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQYBpvuk-AFCIUQd8BMMN5m4aaPcyRKA4JF81EVFA8wy857q3QScEpRfe7_QOOc0CSAs32cGLRKBGSKiff-o5TPCudwCqZyvkatajK_JZ07d6-EmVB_a6zvezQ8Ub7BVMR54hPEuHLzEagKDcwiYP1iSy_oOrXDIM7Z53trsdMCp_GckcyZeUbWyOtp00b3qunk_niu0PNXpZK0ysr0PGRmecfwOJZ-k5AzJxRlxCePy-nLpGWuqA4b1ZCrZSSPaCVAbRNCNeM9bc'
   },
   {
     id: 2,
-    name: 'Neo QLED 8K',
-    category: 'Hogar Inteligente',
-    stock: 42,
-    prediction: 'Riesgo de Quiebre (12 días)',
-    fillWidth: '12%',
-    status: 'REESTOCK URGENTE',
-    statusClass: 'restock',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBHU2YaOK0-c0QbOthwlTUX2DqeAOqssliTgoNvySxuEEVGC497oOkaw7c3wsa4v7UOKWH8V2jH3Zy0A57Jd5haKck9rVs4fzYjQVSB8zb5jDd3TkCa_HrOALhXF6caTMiN-1KsqwQBPzp5EuEj5p8bIh_Z1nQldnr4TF4iRnEhwIHE3zfsyouKsecnQR9hsHOSK-oqFzMLgqNvNXmJYJXZ0y8dAU3p1w7t349sgQYCHP6CDBcH7ZrClgkHofs6lWTNKJ2pjLD_aNU'
+    name: 'SM-A366E/DS',
+    category: 'MOBILE',
+    stock: 153,
+    prediction: 'Crecimiento +41.8%',
+    fillWidth: '75%',
+    status: 'CRECIMIENTO',
+    statusClass: 'healthy',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQYBpvuk-AFCIUQd8BMMN5m4aaPcyRKA4JF81EVFA8wy857q3QScEpRfe7_QOOc0CSAs32cGLRKBGSKiff-o5TPCudwCqZyvkatajK_JZ07d6-EmVB_a6zvezQ8Ub7BVMR54hPEuHLzEagKDcwiYP1iSy_oOrXDIM7Z53trsdMCp_GckcyZeUbWyOtp00b3qunk_niu0PNXpZK0ysr0PGRmecfwOJZ-k5AzJxRlxCePy-nLpGWuqA4b1ZCrZSSPaCVAbRNCNeM9bc'
   },
   {
     id: 3,
-    name: 'Bespoke Fridge',
-    category: 'Línea Blanca',
-    stock: 210,
-    prediction: 'Demanda Estable',
-    fillWidth: '45%',
-    status: 'ESTABLE',
-    statusClass: 'stable',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBNYc1VsksLjA6-2GBzncd2ryueQhyz4Wyhf4NVYBMUv21BV6sbqAGFoFrbX4jKnyzpmQjVsnE1f4iLFhS6WtgeBCPy9fh-r-4-pkfcxMrgzeTFthxdhPyXbbXWOnfqPHNgaL3lTwPb-Kl_LL04JIDCZMWzQ7Ao-TVLpq0Ch8kUi7gsClYDbdyCTEVTd2CHfZ5ndZFZ57XrOoJxsRS9qQ9h7x0Ftyelf5bfoTaclhFWi3mBht5xGKXqAh07zh1DtMad7c2L3sJ-Rhg'
+    name: 'SM-A165M/DS',
+    category: 'MOBILE',
+    stock: 448,
+    prediction: 'Declinación -60.8%',
+    fillWidth: '20%',
+    status: 'DECLIVE',
+    statusClass: 'restock',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQYBpvuk-AFCIUQd8BMMN5m4aaPcyRKA4JF81EVFA8wy857q3QScEpRfe7_QOOc0CSAs32cGLRKBGSKiff-o5TPCudwCqZyvkatajK_JZ07d6-EmVB_a6zvezQ8Ub7BVMR54hPEuHLzEagKDcwiYP1iSy_oOrXDIM7Z53trsdMCp_GckcyZeUbWyOtp00b3qunk_niu0PNXpZK0ysr0PGRmecfwOJZ-k5AzJxRlxCePy-nLpGWuqA4b1ZCrZSSPaCVAbRNCNeM9bc'
   }
 ];
 
+const rotationReport = {
+  modelMetrics: {
+    r2: 0.763,
+    mae: 26.38,
+    precision: 0.79,
+    horizon: '30 días',
+    summary:
+      'Random Forest aplicado a rotación SKU identifica productos de alta prioridad de despacho y riesgos de stock crítico.'
+  },
+  topDispatch: [
+    { rank: 1, modelo: 'Galaxy S24 Ultra', prioridad: 'Crítica', score: 98, demanda: 'Máxima' },
+    { rank: 2, modelo: 'Neo QLED 8K', prioridad: 'Alta', score: 92, demanda: 'Muy alta' },
+    { rank: 3, modelo: 'Bespoke Fridge', prioridad: 'Media', score: 79, demanda: 'Estable' },
+    { rank: 4, modelo: 'Galaxy Watch6', prioridad: 'Media', score: 75, demanda: 'Creciente' },
+    { rank: 5, modelo: 'Samsung Bespoke Oven', prioridad: 'Media', score: 71, demanda: 'Moderada' },
+    { rank: 6, modelo: 'Galaxy Tab S9', prioridad: 'Media', score: 68, demanda: 'Fluctuante' },
+    { rank: 7, modelo: 'SmartThings Hub', prioridad: 'Baja', score: 62, demanda: 'Estable' },
+    { rank: 8, modelo: 'Galaxy Buds3', prioridad: 'Baja', score: 58, demanda: 'Baja' },
+    { rank: 9, modelo: 'Family Hub', prioridad: 'Baja', score: 54, demanda: 'Lenta' },
+    { rank: 10, modelo: 'Galaxy Book4', prioridad: 'Baja', score: 50, demanda: 'Reducida' },
+    { rank: 11, modelo: 'Frame TV', prioridad: 'Baja', score: 47, demanda: 'Reducida' },
+    { rank: 12, modelo: 'Bespoke AirDresser', prioridad: 'Baja', score: 43, demanda: 'Reducida' },
+    { rank: 13, modelo: 'Samsung Oven Flex', prioridad: 'Baja', score: 40, demanda: 'Reducida' },
+    { rank: 14, modelo: 'Samsung Soundbar', prioridad: 'Baja', score: 38, demanda: 'Reducida' },
+    { rank: 15, modelo: 'Galaxy A55', prioridad: 'Baja', score: 35, demanda: 'Reducida' },
+    { rank: 16, modelo: 'Samsung Monitor', prioridad: 'Baja', score: 32, demanda: 'Reducida' },
+    { rank: 17, modelo: 'Wireless Charger', prioridad: 'Baja', score: 29, demanda: 'Reducida' },
+    { rank: 18, modelo: 'Samsung Printer', prioridad: 'Baja', score: 26, demanda: 'Reducida' },
+    { rank: 19, modelo: 'Smart LED Strip', prioridad: 'Baja', score: 23, demanda: 'Reducida' },
+    { rank: 20, modelo: 'Galaxy Tab S9 FE', prioridad: 'Baja', score: 20, demanda: 'Reducida' }
+  ],
+  criticalAlert: {
+    title: 'ALERTA CRÍTICA: QUIEBRE DE STOCK',
+    detail:
+      'Neo QLED 8K proyecta quiebre en 12 días con una rotación negativa esperada. Recomendado reabastecimiento inmediato y foco en despacho directo.',
+    action: 'Alinear despacho urgente y activar rebajas selectivas para liberar espacio de inventario.'
+  },
+  growthOpportunities: [
+    { producto: 'Galaxy S24 Ultra', potencial: '+18%', accion: 'Promoción premium bundle' },
+    { producto: 'Galaxy Watch6', potencial: '+14%', accion: 'Campaña cross-sell wearable' },
+    { producto: 'Galaxy Tab S9', potencial: '+12%', accion: 'Ofertas educativas' },
+    { producto: 'Bespoke Fridge', potencial: '+10%', accion: 'Promoción de instalación incluida' },
+    { producto: 'SmartThings Hub', potencial: '+8%', accion: 'Bundle hogar conectado' }
+  ],
+  declineProducts: [
+    { producto: 'Galaxy Buds3', tendencia: '-12%', recomendacion: 'Reducir descuentos y ajustar stock en tiendas físicas' },
+    { producto: 'Family Hub', tendencia: '-15%', recomendacion: 'Revisar precios y rotar en canales de e-commerce' },
+    { producto: 'Galaxy Book4', tendencia: '-18%', recomendacion: 'Limitar reposición y aumentar promoción por valor' },
+    { producto: 'Frame TV', tendencia: '-20%', recomendacion: 'Enfocar en clearance y ofertas de temporada' }
+  ]
+};
+
 const Panel = () => {
-  // Simulator range value state
-  const [adSpend, setAdSpend] = useState<number>(50);
+  const [alertThreshold, setAlertThreshold] = useState<number>(60);
+  const [viewMode, setViewMode] = useState<'dispatch' | 'growth' | 'decline'>('dispatch');
 
-  // Dynamic calculations based on slider
-  const projectedSales = (12.0 + adSpend / 10).toFixed(1);
-  const projectedMargin = (-1.0 - adSpend / 45).toFixed(1);
+  const attentionLevel = alertThreshold >= 75 ? 'Alta' : alertThreshold >= 45 ? 'Media' : 'Moderada';
 
-  const reliability = resumenData.confiabilidad_modelo;
-  const riskCards = resumenData.resumen_clientes.tarjetas;
-  const problemItems = tiposProblemaData.diagnosticos;
-  const alertItems = problemItems.filter((item) => item.alerta);
-  const recoverySummary = clientesRecuperablesData.resumen;
-  const topRiskClients = clientesRiesgoData.clientes.slice(0, 4);
-  const planActions = planAccionData.acciones;
+  const selectedReportItems = useMemo(() => {
+    if (viewMode === 'growth') {
+      return rotationReport.growthOpportunities;
+    }
+    if (viewMode === 'decline') {
+      return rotationReport.declineProducts;
+    }
+    return rotationReport.topDispatch.slice(0, 5);
+  }, [viewMode]);
 
-  const problemChartData = useMemo(
+  const dispatchChartData = useMemo(
     () => ({
-      labels: problemItems.map((item) => item.etiqueta),
+      labels: rotationReport.topDispatch.slice(0, 5).map((item) => item.modelo),
       datasets: [
         {
-          label: 'Clientes con problema',
-          data: problemItems.map((item) => item.clientes),
-          backgroundColor: problemItems.map((item) => item.color),
-          borderRadius: 12,
-          barThickness: 22
+          label: 'Prioridad de despacho',
+          data: rotationReport.topDispatch.slice(0, 5).map((item) => item.score),
+          backgroundColor: '#7c3aed',
+          borderRadius: 10,
+          barThickness: 16
         }
       ]
     }),
-    [problemItems]
+    []
   );
 
-  const problemChartOptions = useMemo(
+  const reportChartOptions = useMemo(
     () => ({
       responsive: true,
       maintainAspectRatio: false,
@@ -102,6 +154,88 @@ const Panel = () => {
           }
         },
         y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#c6c6c6',
+            stepSize: 20
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.08)'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => `${context.parsed.y} pts`
+          }
+        }
+      }
+    }),
+    []
+  );
+
+  const reliability = resumenData.confiabilidad_modelo;
+  const riskCards = resumenData.resumen_clientes.tarjetas;
+  const problemItems = tiposProblemaData.diagnosticos;
+  const recoverySummary = clientesRecuperablesData.resumen;
+  const topRiskClients = clientesRiesgoData.clientes.slice(0, 4);
+  const planActions = planAccionData.acciones;
+
+  const riskSummaryChartData = useMemo(
+    () => ({
+      labels: riskCards.map((card) => card.nivel),
+      datasets: [
+        {
+          label: 'Clientes en riesgo',
+          data: riskCards.map((card) => card.clientes),
+          backgroundColor: riskCards.map((card) => card.color),
+          borderRadius: 12,
+          barThickness: 22
+        }
+      ]
+    }),
+    [riskCards]
+  );
+
+  const recoverySummaryChartData = useMemo(
+    () => ({
+      labels: ['Alta prioridad', 'Media prioridad', 'Baja prioridad'],
+      datasets: [
+        {
+          label: 'Clientes recuperables',
+          data: [
+            recoverySummary.prioridad_alta,
+            recoverySummary.prioridad_media,
+            recoverySummary.prioridad_baja
+          ],
+          backgroundColor: ['#e74c3c', '#f39c12', '#2ecc71'],
+          borderRadius: 12,
+          barThickness: 22
+        }
+      ]
+    }),
+    [recoverySummary]
+  );
+
+  const summaryChartOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          ticks: {
+            color: '#c6c6c6'
+          },
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          beginAtZero: true,
           ticks: {
             color: '#c6c6c6'
           },
@@ -145,16 +279,21 @@ const Panel = () => {
         <div className="glass-card roi-card p-6 rounded-3xl">
           <div className="roi-card-header">
             <span className="material-symbols-outlined roi-icon">shield_moon</span>
-            <span className="roi-growth">AUC {reliability.auc}</span>
+            <div className="roi-header-meta">
+              <span className="card-badge">Riesgo IA</span>
+              <span className="roi-growth">AUC {reliability.auc}</span>
+            </div>
           </div>
-          <div>
-            <p className="metric-label">Confianza del modelo de riesgo</p>
-            <h3 className="metric-value">{reliability.valor}</h3>
-            <p className="metric-subtext-muted" style={{ marginTop: '0.5rem' }}>
+          <div className="roi-card-body">
+            <div>
+              <p className="metric-label">Confianza del modelo de riesgo</p>
+              <h3 className="metric-value">{reliability.valor}</h3>
+            </div>
+            <p className="metric-subtext-muted roi-card-detail">
               {reliability.detalle}
             </p>
           </div>
-          {/* <div className="roi-graph">
+          <div className="roi-graph">
             <div className="roi-graph-bars">
               <div className="roi-graph-bar" style={{ height: '56%' }}></div>
               <div className="roi-graph-bar" style={{ height: '64%' }}></div>
@@ -162,42 +301,30 @@ const Panel = () => {
               <div className="roi-graph-bar" style={{ height: '94%' }}></div>
               <div className="roi-graph-bar" style={{ height: '81%' }}></div>
             </div>
-          </div> */}
+          </div>
+          <div className="roi-card-footer">
+            <span>Actualización: hace 3 horas</span>
+            <span>Segmentación multicanal lista</span>
+          </div>
         </div>
 
-        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between summary-card">
+        <div className="glass-card p-6 rounded-3xl summary-chart-card">
           <div>
             <p className="metric-label">Clientes en riesgo</p>
             <h3 className="metric-value-medium">{resumenData.resumen_clientes.total_analizados}</h3>
           </div>
-          <div className="risk-pill-list">
-            {riskCards.map((card) => (
-              <div key={card.nivel} className="risk-pill" style={{ borderColor: card.color }}>
-                <span>{card.nivel}</span>
-                <strong>{card.clientes}</strong>
-              </div>
-            ))}
+          <div className="summary-chart-wrapper">
+            <Bar data={riskSummaryChartData} options={summaryChartOptions} />
           </div>
         </div>
 
-        <div className="glass-card p-6 rounded-3xl flex flex-col justify-between summary-card">
+        <div className="glass-card p-6 rounded-3xl summary-chart-card">
           <div>
             <p className="metric-label">Clientes recuperables</p>
             <h3 className="metric-value-medium">{recoverySummary.total_recuperables}</h3>
           </div>
-          <div className="risk-pill-list">
-            <div className="risk-pill" style={{ borderColor: '#e74c3c' }}>
-              <span>Alta prioridad</span>
-              <strong>{recoverySummary.prioridad_alta}</strong>
-            </div>
-            <div className="risk-pill" style={{ borderColor: '#f39c12' }}>
-              <span>Media prioridad</span>
-              <strong>{recoverySummary.prioridad_media}</strong>
-            </div>
-            <div className="risk-pill" style={{ borderColor: '#2ecc71' }}>
-              <span>Baja prioridad</span>
-              <strong>{recoverySummary.prioridad_baja}</strong>
-            </div>
+          <div className="summary-chart-wrapper">
+            <Bar data={recoverySummaryChartData} options={summaryChartOptions} />
           </div>
         </div>
         <div className="glass-card p-6 rounded-3xl problem-card">
@@ -224,12 +351,12 @@ const Panel = () => {
             <div className="card-header-actions">
               <div className="card-title-group">
                 <h3>Predicción de Inventario</h3>
-                <p>Proyección logística a 3 meses (IA Predictiva)</p>
+                <p>Proyección logística (IA Predictiva)</p>
               </div>
-              <div className="card-header-buttons">
+              {/* <div className="card-header-buttons">
                 <button className="card-btn-outline">Exportar Datos</button>
                 <button className="card-btn-active">Vista Trimestral</button>
-              </div>
+              </div> */}
             </div>
 
             <div className="inventory-list">
@@ -268,90 +395,171 @@ const Panel = () => {
 
           {/* Scenario Simulator Card */}
           <div className="glass-card simulator-card p-8 rounded-3xl">
-            <h3 className="card-title-group mb-6 flex items-center gap-3" style={{ fontSize: '24px', fontWeight: 500 }}>
-              <span className="material-symbols-outlined simulator-header-icon">experiment</span>
-              Simulador de Escenarios IA
-            </h3>
+            <div className="simulator-report-header">
+              <div>
+                <h3 className="card-title-group mb-2 flex items-center gap-3" style={{ fontSize: '24px', fontWeight: 500 }}>
+                  <span className="material-symbols-outlined simulator-header-icon">insights</span>
+                  Reporte Ejecutivo IA
+                </h3>
+                <p className="simulator-subtitle">Rotación predictiva y prioridades de despacho basadas en el modelo Random Forest.</p>
+              </div>
+              <div className="simulator-metric-pill">
+                <span>R²</span>
+                <strong>{rotationReport.modelMetrics.r2}</strong>
+              </div>
+              <div className="simulator-metric-pill">
+                <span>MAE</span>
+                <strong>{rotationReport.modelMetrics.mae}</strong>
+              </div>
+            </div>
+
             <div className="simulator-content-grid">
-              <div className="simulator-form-group">
-                <div>
-                  <label className="simulator-label">Estrategia de Promoción</label>
-                  <select className="simulator-select">
-                    <option>Promo X: Cyber Week (+15% Descuento)</option>
-                    <option>Promo Y: Lanzamiento Premium</option>
-                    <option>Promo Z: Liquidación de Temporada</option>
-                  </select>
+              <div className="simulator-side-panel">
+                <div className="simulator-alert-box">
+                  <div className="simulator-alert-title">
+                    <span className="material-symbols-outlined">warning_amber</span>
+                    {rotationReport.criticalAlert.title}
+                  </div>
+                  <p>{rotationReport.criticalAlert.detail}</p>
+                  <small>{rotationReport.criticalAlert.action}</small>
                 </div>
+
+                <div className="simulator-metric-pill" style={{ padding: '1.25rem' }}>
+                  <span>Confianza del modelo</span>
+                  <strong>{(rotationReport.modelMetrics.precision * 100).toFixed(0)}%</strong>
+                  <small>{rotationReport.modelMetrics.horizon} de proyección</small>
+                </div>
+
                 <div>
-                  <label className="simulator-label">Inversión en Ad-Spend (IA)</label>
+                  <label className="simulator-label">Nivel de Atención IA</label>
                   <input
                     type="range"
                     className="simulator-slider"
                     min="10"
                     max="100"
-                    value={adSpend}
-                    onChange={(e) => setAdSpend(Number(e.target.value))}
+                    value={alertThreshold}
+                    onChange={(e) => setAlertThreshold(Number(e.target.value))}
                   />
                   <div className="slider-labels">
-                    <span>$10k</span>
-                    <span>$50k (Recomendado)</span>
-                    <span>$100k</span>
+                    <span>Moderada</span>
+                    <span>{attentionLevel}</span>
+                    <span>Crítica</span>
                   </div>
                 </div>
               </div>
 
-              <div className="simulator-results-box">
-                <p className="simulator-results-title">Impacto Proyectado</p>
-                <div className="simulator-metrics-list">
-                  <div className="simulator-metric-row">
-                    <span className="label">Ventas Estimadas</span>
-                    <span className="value-positive">+{projectedSales}%</span>
+              <div className="simulator-details-grid">
+                <div className="simulator-list-card">
+                  <div className="simulator-tabs">
+                    <button
+                      className={`simulator-tab ${viewMode === 'dispatch' ? 'active' : ''}`}
+                      onClick={() => setViewMode('dispatch')}
+                    >
+                      Prioridad de despacho
+                    </button>
+                    <button
+                      className={`simulator-tab ${viewMode === 'growth' ? 'active' : ''}`}
+                      onClick={() => setViewMode('growth')}
+                    >
+                      Oportunidades
+                    </button>
+                    <button
+                      className={`simulator-tab ${viewMode === 'decline' ? 'active' : ''}`}
+                      onClick={() => setViewMode('decline')}
+                    >
+                      Productos en declive
+                    </button>
                   </div>
-                  <div className="simulator-metric-row">
-                    <span className="label">Margen Bruto</span>
-                    <span className="value-neutral">{projectedMargin}%</span>
+
+                  {viewMode === 'dispatch' ? (
+                    <div className="summary-chart-wrapper" style={{ height: '240px' }}>
+                      <Bar data={dispatchChartData} options={reportChartOptions} />
+                    </div>
+                  ) : (
+                    <div className="simulator-list-grid">
+                      {selectedReportItems.map((item, index) => {
+                        if (viewMode === 'growth') {
+                          const growthItem = item as (typeof rotationReport.growthOpportunities)[number];
+                          return (
+                            <div key={`${growthItem.producto}-${index}`} className="simulator-list-item">
+                              <span className="simulator-list-item-title">{growthItem.producto}</span>
+                              <span className="simulator-list-item-meta">{growthItem.potencial}</span>
+                            </div>
+                          );
+                        }
+
+                        const declineItem = item as (typeof rotationReport.declineProducts)[number];
+                        return (
+                          <div key={`${declineItem.producto}-${index}`} className="simulator-list-item">
+                            <span className="simulator-list-item-title">{declineItem.producto}</span>
+                            <span className="simulator-list-item-meta">{declineItem.tendencia}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                <div className="simulator-list-card">
+                  <h4 className="simulator-data-title">Resumen rápido</h4>
+                  <div className="simulator-list-grid">
+                    <div className="simulator-list-item">
+                      <span className="simulator-list-item-title">Modelos en top dispatch</span>
+                      <span className="simulator-list-item-meta">{rotationReport.topDispatch.length}</span>
+                    </div>
+                    <div className="simulator-list-item">
+                      <span className="simulator-list-item-title">Oportunidades clave</span>
+                      <span className="simulator-list-item-meta">{rotationReport.growthOpportunities.length}</span>
+                    </div>
+                    <div className="simulator-list-item">
+                      <span className="simulator-list-item-title">Productos en declive</span>
+                      <span className="simulator-list-item-meta">{rotationReport.declineProducts.length}</span>
+                    </div>
+                    <div className="simulator-list-item">
+                      <span className="simulator-list-item-title">Prioridad IA</span>
+                      <span className="simulator-list-item-meta">{attentionLevel}</span>
+                    </div>
                   </div>
                 </div>
-                <button className="simulator-action-btn">
-                  Ejecutar Simulación Avanzada
-                </button>
               </div>
+            </div>
+          </div>
+
+          {/* Tipos de problema detectados Card */}
+          <div className="glass-card p-6 rounded-3xl problem-summary-card">
+            <div className="card-header-actions">
+              <div className="card-title-group">
+                <h3>Tipos de problema detectados</h3>
+                <p>Distribución de casos por diagnóstico de canal.</p>
+              </div>
+            </div>
+            <div className="problem-summary-list">
+              {problemItems.map((item) => (
+                <div key={item.tipo} className="problem-summary-item">
+                  <div className="problem-summary-meta">
+                    <span className="problem-dot" style={{ backgroundColor: item.color }}></span>
+                    <div>
+                      <p className="problem-summary-label">{item.etiqueta}</p>
+                      <p className="problem-summary-desc">{item.que_significa}</p>
+                    </div>
+                  </div>
+                  <div className="problem-summary-stats">
+                    <strong>{item.clientes}</strong>
+                    <span>{item.porcentaje}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="problem-summary-callout">
+              <span className="material-symbols-outlined">warning</span>
+              <p>Prioriza primero los problemas con alerta y mayor impacto en el canal.</p>
             </div>
           </div>
         </div>
 
         {/* Right side column */}
         <div className="dashboard-side-col">
-          <div className="glass-card p-6 rounded-3xl problem-summary-card">
-          <div className="card-header-actions">
-            <div className="card-title-group">
-              <h3>Tipos de problema detectados</h3>
-              <p>Distribución de casos por diagnóstico de canal.</p>
-            </div>
-          </div>
-          <div className="problem-summary-list">
-            {problemItems.map((item) => (
-              <div key={item.tipo} className="problem-summary-item">
-                <div className="problem-summary-meta">
-                  <span className="problem-dot" style={{ backgroundColor: item.color }}></span>
-                  <div>
-                    <p className="problem-summary-label">{item.etiqueta}</p>
-                    <p className="problem-summary-desc">{item.que_significa}</p>
-                  </div>
-                </div>
-                <div className="problem-summary-stats">
-                  <strong>{item.clientes}</strong>
-                  <span>{item.porcentaje}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="problem-summary-callout">
-            <span className="material-symbols-outlined">warning</span>
-            <p>Prioriza primero los problemas con alerta y mayor impacto en el canal.</p>
-          </div>
-        </div>
-
+          {/* Top Clientes en Riesgo Card */}
           <div className="glass-card p-6 rounded-3xl risk-card">
             <div className="card-header-actions">
               <div className="card-title-group">
