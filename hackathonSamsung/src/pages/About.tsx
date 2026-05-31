@@ -17,7 +17,7 @@ const teamMembers = [
     badge: 'Developer',
     linkedIn: 'https://www.linkedin.com/in/isabella-andrea-cuesta-niebles-996a012a7/',
     bio: 'Arquitecta principal del motor de recomendaciones basado en redes neuronales, garantizando latencia mínima en transacciones de escala masiva.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCQpoNhsaI6LoOuyD2gcu6rzS29UCK_U4ZIC5MIyFRNRWE8B-m10MvotSGM9ISsOGyP6ZR9FDUPka4YmJH-KQTTVvdKCfZ8s7pPvQDcR0eSe8D4r0SVuvLaeCm911hOibnF307c6GN4u-tXr8NmRkSBvzZunhjFvgu_0oS4KWGwHm49I3fX2X_7d0SJawpEVqmgKV98qo-isBdqqiT6n9YpK_1pLEtrpnNAmKwectdd3Lky-BVOEbojfOgRDTJS-zOp_rKCXndYImY'
+    image: '/assets/fotos/Foto_isa.jpg'
   },
   {
     id: 3,
@@ -38,6 +38,8 @@ const teamMembers = [
 ];
 
 const About = () => {
+  const fallbackFor = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff&size=512`;
+
   return (
     <main className="about-main hero-gradient">
       {/* Hero Section */}
@@ -58,6 +60,7 @@ const About = () => {
                 className="member-image"
                 src={member.image}
                 alt={member.name}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = fallbackFor(member.name); }}
               />
               <div className="member-badge">{member.badge}</div>
             </div>
